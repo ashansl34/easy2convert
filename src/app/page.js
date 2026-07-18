@@ -7,7 +7,14 @@ import DownloadModal from "../components/DownloadModal";
 import Header from "../components/Header";
 
 export default function Home() {
-  const [fileQueue, setFileQueue] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [targetFormat, setTargetFormat] = useState("");
+  const [conversionStatus, setConversionStatus] = useState("idle"); // 'idle' | 'converting' | 'completed' | 'error'
+  const [conversionProgress, setConversionProgress] = useState(0);
+  const [convertedFileUrl, setConvertedFileUrl] = useState("");
+  const [convertedFileName, setConvertedFileName] = useState("");
+  const [convertedFileSize, setConvertedFileSize] = useState(null);
+  const [compressionQuality, setCompressionQuality] = useState(60);
   const [dragActive, setDragActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeDownloadFile, setActiveDownloadFile] = useState(null);
@@ -44,89 +51,41 @@ export default function Home() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  // Detect supported format and suggest default target
-  const getSuggestions = (mimeType, name) => {
-    const ext = name.split(".").pop().toLowerCase();
+  const getFormatsForFile = (file) => {
+    if (!file) return [];
+    const ext = file.name.split(".").pop().toLowerCase();
     
-    if (ext === "docx" || mimeType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-      return {
-        allowedTargets: ["pdf"],
-        defaultTarget: "pdf",
-      };
+    if (ext === "docx" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
+      return ["PDF"];
     }
-    if (ext === "pdf" || mimeType === "application/pdf") {
-      return {
-        allowedTargets: ["docx", "compress"],
-        defaultTarget: "docx",
-      };
+    if (ext === "pdf" || file.type === "application/pdf") {
+      return ["DOCX", "Compress"];
     }
-    if (ext === "heic" || mimeType === "image/heic") {
-      return {
-        allowedTargets: ["jpg", "png", "webp", "compress"],
-        defaultTarget: "jpg",
-      };
+    if (ext === "heic" || file.type === "image/heic") {
+      return ["JPG", "PNG", "WebP", "Compress"];
     }
-    if (ext === "webp" || mimeType === "image/webp") {
-      return {
-        allowedTargets: ["jpg", "png", "compress"],
-        defaultTarget: "png",
-      };
+    if (ext === "webp" || file.type === "image/webp") {
+      return ["JPG", "PNG", "Compress"];
     }
-    if (ext === "png" || mimeType === "image/png") {
-      return {
-        allowedTargets: ["jpg", "webp", "compress"],
-        defaultTarget: "jpg",
-      };
+    if (ext === "png" || file.type === "image/png") {
+      return ["JPG", "WebP", "Compress"];
     }
-    if (ext === "jpg" || ext === "jpeg" || mimeType === "image/jpeg") {
-      return {
-        allowedTargets: ["png", "webp", "compress"],
-        defaultTarget: "png",
-      };
+    if (ext === "jpg" || ext === "jpeg" || file.type === "image/jpeg") {
+      return ["PNG", "WebP", "Compress"];
     }
     
-    // Default fallback
-    return {
-      allowedTargets: ["jpg", "png", "webp", "compress"],
-      defaultTarget: "jpg",
-    };
+    return ["JPG", "PNG", "WebP", "Compress"];
   };
 
-  // Add files to the queue
-  const addFilesToQueue = (files) => {
-    const validTypes = [
-      "image/heic", "image/webp", "image/png", "image/jpeg", "image/jpg",
-      "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ];
-    
-    const newItems = Array.from(files).filter(file => {
-      const ext = file.name.split(".").pop().toLowerCase();
-      const isHeic = ext === "heic";
-      const isDocx = ext === "docx";
-      const isPdf = ext === "pdf";
-      return validTypes.includes(file.type) || isHeic || isDocx || isPdf;
-    }).map(file => {
-      const { allowedTargets, defaultTarget } = getSuggestions(file.type, file.name);
-      return {
-        id: Math.random().toString(36).substring(2, 9),
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        file: file,
-        allowedTargets,
-        targetFormat: defaultTarget,
-        status: "idle", // 'idle' | 'converting' | 'completed' | 'error'
-        progress: 0,
-        downloadUrl: null,
-        convertedName: "",
-        quality: 60, // default quality percentage for compression slider
-        compressedSize: null,
-      };
-    });
-
-    if (newItems.length > 0) {
-      setFileQueue(prev => [...prev, ...newItems]);
-    }
+  const handleFileSelect = (file) => {
+    if (!file) return;
+    setSelectedFile(file);
+    setTargetFormat("");
+    setConversionStatus("idle");
+    setConversionProgress(0);
+    setConvertedFileUrl("");
+    setConvertedFileName("");
+    setConvertedFileSize(null);
   };
 
   // Drag handlers
@@ -146,44 +105,19 @@ export default function Home() {
     setDragActive(false);
     
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      addFilesToQueue(e.dataTransfer.files);
+      handleFileSelect(e.dataTransfer.files[0]);
     }
   };
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files[0]) {
-      addFilesToQueue(e.target.files);
+      handleFileSelect(e.target.files[0]);
     }
   };
 
   // Trigger file dialog
   const onButtonClick = () => {
     fileInputRef.current.click();
-  };
-
-  // Update target format for a specific file
-  const handleTargetChange = (id, newFormat) => {
-    setFileQueue(prev =>
-      prev.map(item => (item.id === id ? { ...item, targetFormat: newFormat } : item))
-    );
-  };
-
-  // Update quality for compression
-  const handleQualityChange = (id, newQuality) => {
-    setFileQueue(prev =>
-      prev.map(item => (item.id === id ? { ...item, quality: newQuality } : item))
-    );
-  };
-
-  // Remove file from queue
-  const removeFile = (id) => {
-    setFileQueue(prev => {
-      const item = prev.find(i => i.id !== id);
-      if (item && item.downloadUrl) {
-        URL.revokeObjectURL(item.downloadUrl);
-      }
-      return prev.filter(i => i.id !== id);
-    });
   };
 
   // Canvas-based image converter & compressor
@@ -377,14 +311,13 @@ export default function Home() {
     return doc.output("blob");
   };
 
-  // Individual file converter execution
-  const handleConvert = async (item) => {
-    // Set file state to converting
-    setFileQueue(prev =>
-      prev.map(i => (i.id === item.id ? { ...i, status: "converting", progress: 5 } : i))
-    );
+  // Single file converter execution
+  const handleConvertNow = async () => {
+    if (!selectedFile || !targetFormat) return;
 
-    // Realistic progress animation
+    setConversionStatus("converting");
+    setConversionProgress(5);
+
     let progress = 5;
     const progressInterval = setInterval(() => {
       progress += Math.floor(Math.random() * 12) + 4;
@@ -392,108 +325,83 @@ export default function Home() {
         progress = 95;
         clearInterval(progressInterval);
       }
-      setFileQueue(prev =>
-        prev.map(i => (i.id === item.id ? { ...i, progress: Math.min(progress, 95) } : i))
-      );
+      setConversionProgress(Math.min(progress, 95));
     }, 150);
 
     try {
-      const { file, targetFormat, quality } = item;
       let convertedBlob;
-      const fileExt = file.name.split(".").pop().toLowerCase();
-      const isHeic = fileExt === "heic" || file.type === "image/heic";
-      const isDocx = fileExt === "docx" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-      const isPdf = fileExt === "pdf" || file.type === "application/pdf";
+      const fileExt = selectedFile.name.split(".").pop().toLowerCase();
+      const isHeic = fileExt === "heic" || selectedFile.type === "image/heic";
+      const isDocx = fileExt === "docx" || selectedFile.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+      const isPdf = fileExt === "pdf" || selectedFile.type === "application/pdf";
       
       let extension = targetFormat.toLowerCase();
 
-      if (targetFormat === "compress") {
+      if (targetFormat === "Compress") {
         extension = fileExt;
         if (isPdf) {
-          convertedBlob = await compressPdfClient(file);
+          convertedBlob = await compressPdfClient(selectedFile);
         } else if (isHeic) {
           const heic2any = (await import("heic2any")).default;
           const jpegBlob = await heic2any({
-            blob: file,
+            blob: selectedFile,
             toType: "image/jpeg",
-            quality: (quality || 60) / 100,
+            quality: compressionQuality / 100,
           });
           convertedBlob = Array.isArray(jpegBlob) ? jpegBlob[0] : jpegBlob;
           extension = "jpg";
         } else {
-          convertedBlob = await convertViaCanvas(file, fileExt, (quality || 60) / 100);
+          convertedBlob = await convertViaCanvas(selectedFile, fileExt, compressionQuality / 100);
         }
-      } else if (isDocx && targetFormat === "pdf") {
-        convertedBlob = await convertDocxToPdfClient(file);
-      } else if (isPdf && targetFormat === "docx") {
-        convertedBlob = await convertPdfToDocxClient(file);
+      } else if (isDocx && targetFormat === "PDF") {
+        convertedBlob = await convertDocxToPdfClient(selectedFile);
+      } else if (isPdf && targetFormat === "DOCX") {
+        convertedBlob = await convertPdfToDocxClient(selectedFile);
         extension = "docx";
       } else if (isHeic) {
         const heic2any = (await import("heic2any")).default;
         const conversionResult = await heic2any({
-          blob: file,
+          blob: selectedFile,
           toType: "image/jpeg",
           quality: 0.85,
         });
         const jpegBlob = Array.isArray(conversionResult) ? conversionResult[0] : conversionResult;
 
-        if (targetFormat === "jpg" || targetFormat === "jpeg") {
+        if (targetFormat === "JPG" || targetFormat === "JPEG") {
           convertedBlob = jpegBlob;
         } else {
           convertedBlob = await convertViaCanvas(jpegBlob, targetFormat, 0.88);
         }
       } else {
-        convertedBlob = await convertViaCanvas(file, targetFormat, 0.88);
+        convertedBlob = await convertViaCanvas(selectedFile, targetFormat, 0.88);
       }
 
       clearInterval(progressInterval);
 
       // Create download URL
       const downloadUrl = URL.createObjectURL(convertedBlob);
-      const originalBase = file.name.substring(0, file.name.lastIndexOf("."));
-      const suffix = targetFormat === "compress" ? "_compressed" : "";
+      const originalBase = selectedFile.name.substring(0, selectedFile.name.lastIndexOf("."));
+      const suffix = targetFormat === "Compress" ? "_compressed" : "";
       const convertedName = `${originalBase}${suffix}.${extension}`;
 
-      setFileQueue(prev =>
-        prev.map(i =>
-          i.id === item.id
-            ? {
-                ...i,
-                status: "completed",
-                progress: 100,
-                downloadUrl,
-                convertedName,
-                compressedSize: convertedBlob.size,
-              }
-            : i
-        )
-      );
+      setConvertedFileUrl(downloadUrl);
+      setConvertedFileName(convertedName);
+      setConvertedFileSize(convertedBlob.size);
+      setConversionStatus("completed");
+      setConversionProgress(100);
+      
+      // Trigger download popup modal flow automatically after completion
+      triggerDownloadFlow({
+        convertedName,
+        downloadUrl,
+      });
+
     } catch (err) {
       clearInterval(progressInterval);
       console.error("Conversion failed:", err);
-      setFileQueue(prev =>
-        prev.map(i => (i.id === item.id ? { ...i, status: "error", progress: 0 } : i))
-      );
+      setConversionStatus("error");
+      setConversionProgress(0);
     }
-  };
-
-  // Convert all items in queue that are idle
-  const handleConvertAll = () => {
-    fileQueue.forEach(item => {
-      if (item.status === "idle" || item.status === "error") {
-        handleConvert(item);
-      }
-    });
-  };
-
-  // Clear completed downloads
-  const handleClearQueue = () => {
-    fileQueue.forEach(item => {
-      if (item.downloadUrl) {
-        URL.revokeObjectURL(item.downloadUrl);
-      }
-    });
-    setFileQueue([]);
   };
 
   // Open interstitial download modal
@@ -548,7 +456,7 @@ export default function Home() {
             <div className="relative z-10">
               {/* Card Slogan */}
               <div className="text-center mb-8">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-indigo-400 bg-indigo-950/40 px-2.5 py-1 rounded-full border border-indigo-900/40">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-full border border-emerald-900/40">
                   Micro-Niche Optimizer
                 </span>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mt-2.5">
@@ -559,312 +467,227 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Drag and Drop Zone */}
-              <div
-                onDragEnter={handleDrag}
-                onDragOver={handleDrag}
-                onDragLeave={handleDrag}
-                onDrop={handleDrop}
-                onClick={onButtonClick}
-                className={`w-full py-12 px-6 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${
-                  dragActive
-                    ? "border-indigo-500 bg-indigo-950/20 scale-[1.01] shadow-inner"
-                    : "border-gray-800 bg-[#0e1422]/60 hover:border-indigo-500 hover:bg-[#12192c]/75 hover:shadow-md"
-                }`}
-              >
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  className="hidden"
-                  multiple
-                  accept="image/heic,image/webp,image/png,image/jpeg,image/jpg,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,.pdf"
-                  onChange={handleFileChange}
-                />
-                
-                <div className="w-14 h-14 bg-indigo-950/40 rounded-2xl flex items-center justify-center text-indigo-400 border border-indigo-900/30 mb-4 shadow-sm">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.8}
-                    stroke="currentColor"
-                    className="w-7 h-7"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v12m0 0l-3-3m3 3l3-3m-3.01-16A5.25 5.25 0 003 8.25c0 1.38.365 2.68 1.01 3.81a5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75"
-                    />
-                  </svg>
-                </div>
-                
-                <p className="text-sm font-bold text-gray-200">
-                  Drag & drop your files here
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Supports DOCX, PDF, HEIC, WebP, PNG, JPG (Max 50MB per file)
-                </p>
-                <button
-                  type="button"
-                  className="mt-6 py-4 px-8 bg-indigo-600 hover:bg-indigo-700 hover:scale-105 active:scale-98 text-white font-bold rounded-xl text-lg shadow-lg shadow-indigo-950/50 border border-indigo-500/30 transition-all duration-300 ease-out"
+              {/* If no file is selected, show dropzone */}
+              {!selectedFile ? (
+                <div
+                  onDragEnter={handleDrag}
+                  onDragOver={handleDrag}
+                  onDragLeave={handleDrag}
+                  onDrop={handleDrop}
+                  onClick={onButtonClick}
+                  className={`w-full py-12 px-6 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${
+                    dragActive
+                      ? "border-emerald-500 bg-emerald-950/20 scale-[1.01] shadow-inner"
+                      : "border-gray-800 bg-[#0e1422]/60 hover:border-emerald-500 hover:bg-[#12192c]/75 hover:shadow-md"
+                  }`}
                 >
-                  Browse Files
-                </button>
-              </div>
-
-              {/* Converter File List Section */}
-              {fileQueue.length > 0 && (
-                <div className="mt-8 border-t border-gray-900 pt-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-bold text-gray-300">
-                      Files in Queue ({fileQueue.length})
-                    </h3>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={handleClearQueue}
-                        className="text-xs font-semibold text-gray-500 hover:text-red-400 transition-colors"
-                      >
-                        Clear All
-                      </button>
-                    </div>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    className="hidden"
+                    accept="image/heic,image/webp,image/png,image/jpeg,image/jpg,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,.pdf"
+                    onChange={handleFileChange}
+                  />
+                  
+                  <div className="w-14 h-14 bg-emerald-950/40 rounded-2xl flex items-center justify-center text-emerald-400 border border-emerald-900/30 mb-4 shadow-sm">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.8}
+                      stroke="currentColor"
+                      className="w-7 h-7"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 9v12m0 0l-3-3m3 3l3-3m-3.01-16A5.25 5.25 0 003 8.25c0 1.38.365 2.68 1.01 3.81a5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75"
+                      />
+                    </svg>
                   </div>
-
-                  {/* Queue Items */}
-                  <div className="space-y-4 max-h-96 overflow-y-auto pr-1">
-                    {fileQueue.map((item) => (
-                      <div
-                        key={item.id}
-                        className="border border-gray-900 rounded-xl bg-[#030712] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md hover:border-gray-800 transition-all duration-200"
-                      >
-                        {/* Name and Meta */}
-                        <div className="flex items-start gap-3 min-w-0 max-w-xs md:max-w-sm">
-                          <div className="w-10 h-10 bg-gray-950 rounded-lg flex items-center justify-center text-gray-500 border border-gray-900 flex-shrink-0">
-                            {item.name.toLowerCase().endsWith(".pdf") ? (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-5 h-5 text-red-500"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                                />
-                              </svg>
-                            ) : item.name.toLowerCase().endsWith(".docx") ? (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-5 h-5 text-blue-400"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                                />
-                              </svg>
-                            ) : (
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-5 h-5"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                                />
-                              </svg>
-                            )}
-                          </div>
-                          <div className="min-w-0 font-medium">
-                            <p className="text-xs font-bold text-gray-200 truncate" title={item.name}>
-                              {item.name}
-                            </p>
-                            <p className="text-[10px] text-gray-500">
-                              {formatSize(item.size)}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Middle Controls (Selectors, Compression slider, and Status) */}
-                        <div className="flex flex-col md:flex-row items-start md:items-center gap-3">
-                          {item.status === "idle" ? (
-                            <div className="flex flex-wrap items-center gap-2">
-                              <div className="flex items-center gap-1">
-                                <span className="text-[11px] font-semibold text-gray-500 whitespace-nowrap">
-                                  Action:
-                                </span>
-                                <select
-                                  value={item.targetFormat}
-                                  onChange={(e) => handleTargetChange(item.id, e.target.value)}
-                                  className="bg-gray-950 border border-gray-800 rounded-lg text-xs font-bold text-gray-300 px-2 py-1 outline-none focus:border-indigo-500 transition-colors"
-                                >
-                                  {item.allowedTargets.map((format) => (
-                                    <option key={format} value={format}>
-                                      {format === "compress" ? "COMPRESS" : `TO ${format.toUpperCase()}`}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                              
-                              {/* Compression slider if 'compress' selected */}
-                              {item.targetFormat === "compress" && !item.name.toLowerCase().endsWith(".pdf") && (
-                                <div className="flex flex-col gap-0.5 w-24">
-                                  <div className="flex justify-between text-[9px] font-bold text-gray-400">
-                                    <span>Quality:</span>
-                                    <span className="text-indigo-400">{item.quality || 60}%</span>
-                                  </div>
-                                  <input
-                                    type="range"
-                                    min="10"
-                                    max="90"
-                                    value={item.quality || 60}
-                                    onChange={(e) => handleQualityChange(item.id, parseInt(e.target.value))}
-                                    className="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                                  />
-                                </div>
-                              )}
-                            </div>
-                          ) : item.status === "converting" ? (
-                            <div className="w-32 flex flex-col gap-1.5">
-                              <div className="flex justify-between text-[9px] font-semibold text-indigo-400">
-                                <span>Processing...</span>
-                                <span>{item.progress}%</span>
-                              </div>
-                              <div className="w-full bg-gray-950 rounded-full h-1.5 overflow-hidden">
-                                <div
-                                  className="bg-indigo-600 h-full rounded-full transition-all duration-150 bg-gradient-to-r from-indigo-600 to-indigo-500"
-                                  style={{ width: `${item.progress}%` }}
-                                />
-                              </div>
-                            </div>
-                          ) : item.status === "completed" ? (
-                            <div className="text-left md:text-right">
-                              <span className="text-xs font-semibold text-emerald-400 flex items-center justify-start md:justify-end gap-1 bg-emerald-950/40 px-2 py-1 rounded-full border border-emerald-900/50">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth={2.5}
-                                  stroke="currentColor"
-                                  className="w-3.5 h-3.5"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M4.5 12.75l6 6 9-13.5"
-                                  />
-                                </svg>
-                                {item.targetFormat === "compress" ? "Compressed" : "Converted"}
-                              </span>
-                              {item.compressedSize && (
-                                <p className="text-[9.5px] font-bold text-gray-500 mt-1">
-                                  {formatSize(item.compressedSize)} 
-                                  {item.compressedSize < item.size && (
-                                    <span className="text-emerald-400 ml-1">
-                                      (-{Math.round(((item.size - item.compressedSize) / item.size) * 100)}%)
-                                    </span>
-                                  )}
-                                </p>
-                              )}
-                            </div>
-                          ) : (
-                            <span className="text-xs font-semibold text-red-400 flex items-center gap-1 bg-red-950/40 px-2 py-1 rounded-full border border-red-900/50">
-                              Error
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Action buttons */}
-                        <div className="flex items-center gap-2 justify-end">
-                          {item.status === "idle" && (
-                            <button
-                              onClick={() => handleConvert(item)}
-                              className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-semibold rounded-lg text-xs transition-all duration-150 shadow-sm shadow-indigo-900/30"
-                            >
-                              Process
-                            </button>
-                          )}
-                          {item.status === "completed" && (
-                            <button
-                              onClick={() => triggerDownloadFlow(item)}
-                              className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-semibold rounded-lg text-xs transition-all duration-150 shadow-sm shadow-emerald-900/30 flex items-center gap-1"
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={2.5}
-                                stroke="currentColor"
-                                className="w-3 h-3"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-                                />
-                              </svg>
-                              Download
-                            </button>
-                          )}
-                          {item.status === "error" && (
-                            <button
-                              onClick={() => handleConvert(item)}
-                              className="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 font-semibold rounded-lg text-xs border border-gray-700 transition-all duration-150"
-                            >
-                              Retry
-                            </button>
-                          )}
-                          <button
-                            onClick={() => removeFile(item.id)}
-                            className="p-1.5 text-gray-500 hover:text-gray-300 hover:bg-gray-900 rounded-lg transition-all"
-                            aria-label="Remove file"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              strokeWidth={2}
-                              stroke="currentColor"
-                              className="w-4 h-4"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          </button>
-                        </div>
+                  
+                  <p className="text-sm font-bold text-gray-200">
+                    Drag & drop your file here
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Supports DOCX, PDF, HEIC, WebP, PNG, JPG (Max 50MB)
+                  </p>
+                  <button
+                    type="button"
+                    className="mt-6 py-4 px-8 bg-emerald-600 hover:bg-emerald-700 hover:scale-105 active:scale-98 text-white font-bold rounded-xl text-lg shadow-lg shadow-emerald-950/50 border border-emerald-500/30 transition-all duration-300 ease-out"
+                  >
+                    Browse Files
+                  </button>
+                </div>
+              ) : (
+                /* Selected File Step-by-Step UI */
+                <div className="w-full space-y-6 transition-all duration-500 animate-fade-in">
+                  
+                  {/* File Info Card */}
+                  <div className="border border-gray-900 rounded-xl bg-[#030712] p-4 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 bg-gray-950 rounded-lg flex items-center justify-center text-gray-500 border border-gray-900 flex-shrink-0">
+                        {selectedFile.name.toLowerCase().endsWith(".pdf") ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-red-500">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                          </svg>
+                        ) : selectedFile.name.toLowerCase().endsWith(".docx") ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-blue-400">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                          </svg>
+                        )}
                       </div>
-                    ))}
+                      <div className="min-w-0 font-medium">
+                        <p className="text-xs font-bold text-gray-200 truncate max-w-xs md:max-w-md" title={selectedFile.name}>
+                          {selectedFile.name}
+                        </p>
+                        <p className="text-[10px] text-gray-500">
+                          {formatSize(selectedFile.size)}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {conversionStatus === "idle" && (
+                      <button
+                        onClick={() => setSelectedFile(null)}
+                        className="p-1.5 text-gray-500 hover:text-gray-300 hover:bg-gray-900 rounded-lg transition-all cursor-pointer"
+                        aria-label="Deselect file"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    )}
                   </div>
 
-                  {/* Batch controls */}
-                  {fileQueue.some(i => i.status === "idle") && (
-                    <div className="mt-6 flex justify-end">
-                      <button
-                        onClick={handleConvertAll}
-                        className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-semibold rounded-xl text-xs transition-all duration-200 shadow-md shadow-indigo-900/20"
-                      >
-                        Process Queue
-                      </button>
+                  {/* Format Selector Section */}
+                  {conversionStatus === "idle" && (
+                    <div className="space-y-4 animate-fade-in duration-300">
+                      <div className="text-left">
+                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                          Select Output Format
+                        </h4>
+                      </div>
+
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        {getFormatsForFile(selectedFile).map((format) => (
+                          <button
+                            key={format}
+                            onClick={() => setTargetFormat(format)}
+                            className={`py-3.5 px-4 rounded-xl border text-sm font-bold uppercase transition-all duration-200 cursor-pointer ${
+                              targetFormat === format
+                                ? "border-emerald-500 bg-emerald-950/20 text-emerald-400 shadow-md shadow-emerald-950/10"
+                                : "border-gray-800 bg-[#030712] text-gray-400 hover:border-gray-700 hover:text-gray-200"
+                            }`}
+                          >
+                            {format === "Compress" ? "COMPRESS" : `TO ${format}`}
+                          </button>
+                        ))}
+                      </div>
+
+                      {/* Compression slider */}
+                      {targetFormat === "Compress" && !selectedFile.name.toLowerCase().endsWith(".pdf") && (
+                        <div className="bg-[#030712] border border-gray-900 rounded-xl p-4 space-y-2 max-w-md">
+                          <div className="flex justify-between text-xs font-bold text-gray-400">
+                            <span>Target Compression Quality</span>
+                            <span className="text-emerald-400">{compressionQuality}%</span>
+                          </div>
+                          <input
+                            type="range"
+                            min="10"
+                            max="90"
+                            value={compressionQuality}
+                            onChange={(e) => setCompressionQuality(parseInt(e.target.value))}
+                            className="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                          />
+                          <p className="text-[10px] text-gray-500">
+                            Lower quality values yields higher compression and smaller file dimensions.
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
+
+                  {/* Converting State / Progress Bar */}
+                  {conversionStatus === "converting" && (
+                    <div className="w-full bg-[#030712] border border-gray-900 rounded-xl p-5 space-y-3">
+                      <div className="flex justify-between items-center text-xs font-bold">
+                        <span className="text-emerald-400 animate-pulse">Converting file locally...</span>
+                        <span className="text-emerald-400">{conversionProgress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-950 rounded-full h-2 overflow-hidden">
+                        <div
+                          className="bg-gradient-to-r from-emerald-500 to-teal-600 h-full rounded-full transition-all duration-150"
+                          style={{ width: `${conversionProgress}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Completed State */}
+                  {conversionStatus === "completed" && (
+                    <div className="w-full bg-[#030712] border border-gray-900 rounded-xl p-5 space-y-4 text-center">
+                      <div className="inline-flex w-12 h-12 bg-emerald-950/30 rounded-full items-center justify-center text-emerald-400 border border-emerald-900/40 mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-white">Conversion Successful!</h4>
+                        <p className="text-xs text-gray-400 mt-1 max-w-sm mx-auto">
+                          File is converted to <strong>{convertedFileName}</strong>.
+                        </p>
+                        {convertedFileSize && (
+                          <p className="text-[10px] text-gray-500 mt-0.5">
+                            Original: {formatSize(selectedFile.size)} → Output: {formatSize(convertedFileSize)} 
+                            {convertedFileSize < selectedFile.size && (
+                              <span className="text-emerald-400 ml-1">
+                                (-{Math.round(((selectedFile.size - convertedFileSize) / selectedFile.size) * 100)}%)
+                              </span>
+                            )}
+                          </p>
+                        )}
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                        <button
+                          onClick={() => triggerDownloadFlow({ convertedName: convertedFileName, downloadUrl: convertedFileUrl })}
+                          className="py-3 px-6 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold rounded-xl text-sm transition-all shadow-md shadow-emerald-900/30 cursor-pointer"
+                        >
+                          Download Converted File
+                        </button>
+                        <button
+                          onClick={() => setSelectedFile(null)}
+                          className="py-3 px-6 bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold rounded-xl text-sm border border-gray-800 transition-all cursor-pointer"
+                        >
+                          Convert Another File
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Primary CTA Button for conversion execution */}
+                  {conversionStatus === "idle" && (
+                    <button
+                      onClick={handleConvertNow}
+                      disabled={!targetFormat}
+                      className={`w-full py-4 rounded-xl text-sm font-extrabold uppercase tracking-widest transition-all duration-300 ${
+                        targetFormat
+                          ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.01] hover:shadow-emerald-950/60 active:scale-98 cursor-pointer"
+                          : "bg-gray-950 text-gray-600 border border-gray-900 cursor-not-allowed"
+                      }`}
+                    >
+                      Convert Now
+                    </button>
+                  )}
+
                 </div>
               )}
-            </div>
 
+            </div>
           </div>
 
           {/* Quick conversion tags */}
@@ -877,7 +700,7 @@ export default function Home() {
                 <button
                   key={tag}
                   onClick={onButtonClick}
-                  className="text-sm md:text-base font-semibold text-gray-300 bg-[#0e1422] border border-gray-800 rounded-xl py-3 px-6 hover:border-indigo-500 hover:bg-[#12192c] hover:text-indigo-400 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md cursor-pointer"
+                  className="text-sm md:text-base font-semibold text-gray-300 bg-[#0e1422] border border-gray-800 rounded-xl py-3 px-6 hover:border-emerald-500 hover:bg-[#12192c] hover:text-emerald-400 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md cursor-pointer"
                 >
                   {tag}
                 </button>
