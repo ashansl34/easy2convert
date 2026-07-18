@@ -1,5 +1,4 @@
 import { Outfit } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -24,10 +23,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} h-full antialiased`}>
       <head>
-        <Script
+        <script
+          async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3495501252331334"
           crossOrigin="anonymous"
-          strategy="beforeInteractive"
         />
       </head>
       <body className="min-h-full flex flex-col font-sans bg-white text-gray-800">
