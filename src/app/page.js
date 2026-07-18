@@ -4,12 +4,29 @@ import React, { useState, useEffect, useRef } from "react";
 import AntiGravityBackground from "../components/AntiGravityBackground";
 import AdPlaceholder from "../components/AdPlaceholder";
 import DownloadModal from "../components/DownloadModal";
+import Header from "../components/Header";
 
 export default function Home() {
   const [fileQueue, setFileQueue] = useState([]);
   const [dragActive, setDragActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeDownloadFile, setActiveDownloadFile] = useState(null);
+  const [expandedFaq, setExpandedFaq] = useState(null);
+
+  const faqs = [
+    {
+      question: "Is easy2convert.xyz safe to use?",
+      answer: "Yes, 100%. All conversions and calculations happen locally inside your browser sandbox. Your files never touch a remote server, ensuring complete confidentiality.",
+    },
+    {
+      question: "What is the maximum file size limit?",
+      answer: "You can process files up to 50MB entirely client-side, restricted only by your local browser's memory constraints.",
+    },
+    {
+      question: "Are the developer calculators free?",
+      answer: "Yes, all designer and developer utility tools are 100% free and open for lifetime use without registration.",
+    },
+  ];
   
   // Refs for scrolling navigation
   const converterRef = useRef(null);
@@ -503,76 +520,23 @@ export default function Home() {
     }
   };
 
+  const handleScrollTo = (section) => {
+    if (section === "converter") scrollTo(converterRef);
+    if (section === "guide") scrollTo(guideRef);
+    if (section === "webp") scrollTo(webpRef);
+    if (section === "quality") scrollTo(qualityRef);
+  };
+
   return (
     <div className="min-h-screen flex flex-col justify-between font-sans bg-[#030712] text-gray-200 selection:bg-indigo-950 selection:text-white select-none">
       
       {/* 1. Header: Logo + Simple Navigation */}
-      <header className="w-full bg-[#030712] border-b border-gray-900 px-6 py-4 sticky top-0 z-40 shadow-sm shadow-black/30">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-extrabold shadow-sm shadow-indigo-500/20">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2.5}
-                stroke="currentColor"
-                className="w-5 h-5"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                />
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-md font-bold tracking-tight text-white animate-pulse">
-                easy2convert.xyz
-              </h1>
-              <p className="text-[10px] text-gray-500 font-semibold leading-none">
-                100% Client-Side Engine
-              </p>
-            </div>
-          </div>
-          
-          <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-gray-400">
-            <button onClick={() => scrollTo(converterRef)} className="hover:text-indigo-400 transition-colors">
-              Converter
-            </button>
-            <button onClick={() => scrollTo(guideRef)} className="hover:text-indigo-400 transition-colors">
-              How To Convert
-            </button>
-            <button onClick={() => scrollTo(webpRef)} className="hover:text-indigo-400 transition-colors">
-              What is WebP?
-            </button>
-            <button onClick={() => scrollTo(qualityRef)} className="hover:text-indigo-400 transition-colors">
-              Quality Analysis
-            </button>
-          </nav>
+      <Header currentPage="home" onScrollTo={handleScrollTo} />
 
-          <span className="flex items-center gap-1 bg-emerald-950/40 text-emerald-400 px-3 py-1 rounded-full border border-emerald-900/50 text-xs font-semibold">
-            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
-            Secure local sandbox
-          </span>
-        </div>
-      </header>
 
-      {/* Top Banner Advertisement (Placeholder A) */}
-      <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
-        <AdPlaceholder type="banner" className="opacity-90" />
-      </div>
 
-      {/* 2. Core WebP/HEIC Converter Tool Zone (3-column layout on desktop) */}
-      <section ref={converterRef} className="w-full max-w-7xl mx-auto px-4 md:px-6 flex items-start gap-6 py-4 justify-center">
-        
-        {/* Left Side Scraper (Placeholder B) */}
-        <aside className="hidden lg:block sticky top-24 self-start flex-shrink-0 opacity-90">
-          <AdPlaceholder type="scraper" />
-        </aside>
-
-        {/* Center Workspace (Core WebP/HEIC Converter Tool Zone) */}
-        <div className="flex-grow max-w-3xl w-full flex flex-col items-center">
+      {/* 2. Core WebP/HEIC Converter Tool Zone */}
+      <section ref={converterRef} className="w-full max-w-3xl mx-auto px-4 md:px-6 py-10 flex flex-col items-center justify-center">
           
           {/* Main Converter Card - Anti-gravity background restricted to this box */}
           <div className="w-full bg-[#0b0f19] border border-gray-900 rounded-2xl shadow-2xl shadow-black/80 p-6 md:p-8 backdrop-blur-md relative overflow-hidden transition-all duration-300">
@@ -588,10 +552,10 @@ export default function Home() {
                   Micro-Niche Optimizer
                 </span>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mt-2.5">
-                  Convert WebP & HEIC Instantly
+                  All-in-One Fast Online File Converter
                 </h2>
                 <p className="text-sm text-gray-400 mt-2 max-w-md mx-auto leading-relaxed">
-                  Fast client-side file transformation. Drag & drop files here to process locally without uploading anything to remote servers.
+                  Fast client-side transformation. Convert DOCX, PDF, HEIC, WebP, PNG, and JPG locally without uploading anything to remote servers.
                 </p>
               </div>
 
@@ -642,7 +606,7 @@ export default function Home() {
                 </p>
                 <button
                   type="button"
-                  className="mt-4 px-4 py-2 bg-indigo-950/60 hover:bg-indigo-900/50 text-indigo-400 font-semibold rounded-lg text-xs border border-indigo-900/50 shadow-sm transition-all duration-200"
+                  className="mt-6 py-4 px-8 bg-indigo-600 hover:bg-indigo-700 hover:scale-105 active:scale-98 text-white font-bold rounded-xl text-lg shadow-lg shadow-indigo-950/50 border border-indigo-500/30 transition-all duration-300 ease-out"
                 >
                   Browse Files
                 </button>
@@ -904,26 +868,22 @@ export default function Home() {
           </div>
 
           {/* Quick conversion tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-6 max-w-xl text-center">
-            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">
+          <div className="flex flex-col items-center justify-center gap-4 mt-6 max-w-2xl text-center">
+            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">
               Quick Actions:
             </span>
-            {["HEIC to JPG", "WebP to JPG", "WebP to PNG", "Word to PDF", "PDF to Word", "Compress Image"].map((tag) => (
-              <span
-                key={tag}
-                className="text-[10px] font-semibold text-gray-400 bg-[#0b0f19] border border-gray-900 rounded-full px-2.5 py-1 hover:border-indigo-900 hover:text-indigo-400 cursor-default transition-colors duration-150 shadow-sm"
-              >
-                {tag}
-              </span>
-            ))}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {["HEIC to JPG", "WebP to JPG", "WebP to PNG", "Word to PDF", "PDF to Word", "Compress Image"].map((tag) => (
+                <button
+                  key={tag}
+                  onClick={onButtonClick}
+                  className="text-sm md:text-base font-semibold text-gray-300 bg-[#0e1422] border border-gray-800 rounded-xl py-3 px-6 hover:border-indigo-500 hover:bg-[#12192c] hover:text-indigo-400 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md cursor-pointer"
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
           </div>
-
-        </div>
-
-        {/* Right Side Scraper (Placeholder C) */}
-        <aside className="hidden lg:block sticky top-24 self-start flex-shrink-0 opacity-90">
-          <AdPlaceholder type="scraper" />
-        </aside>
 
       </section>
 
@@ -1057,6 +1017,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 3.5 FAQ Section */}
+      <section className="w-full bg-[#030712] border-t border-gray-900 py-16 px-6">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="text-center mb-8">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-full border border-emerald-900/40">
+              Common Questions
+            </span>
+            <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight mt-2">
+              Frequently Asked Questions
+            </h3>
+          </div>
+
+          <div className="space-y-4 max-w-2xl mx-auto">
+            {faqs.map((faq, idx) => {
+              const isOpen = expandedFaq === idx;
+              return (
+                <div
+                  key={idx}
+                  className="border border-gray-900 rounded-xl bg-[#0b0f19] overflow-hidden transition-all duration-300"
+                >
+                  <button
+                    onClick={() => setExpandedFaq(isOpen ? null : idx)}
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-sm text-gray-200 hover:text-emerald-400 transition-colors"
+                  >
+                    <span>{faq.question}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2.5}
+                      stroke="currentColor"
+                      className={`w-4 h-4 text-emerald-400 transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                  </button>
+                  <div
+                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                      isOpen ? "max-h-40 border-t border-gray-900" : "max-h-0"
+                    }`}
+                  >
+                    <p className="p-5 text-xs text-gray-400 leading-relaxed bg-[#030712]/30">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* 4. Footer: Privacy Policy | Terms | Contact Us */}
       <footer className="w-full bg-[#030712] border-t border-gray-900 py-8 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -1068,14 +1082,14 @@ export default function Home() {
               Secure client-side cryptography. Images and files are processed strictly inside sandboxed browser memory. Files are never uploaded to any remote server, guaranteeing absolute confidentiality.
             </p>
           </div>
-          <div className="flex gap-6 text-xs font-bold text-gray-500">
-            <a href="#" className="hover:text-indigo-400 transition-colors">
+          <div className="flex flex-wrap gap-3">
+            <a href="#" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-indigo-400 transition-colors">
+            <a href="#" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Terms of Service
             </a>
-            <a href="#" className="hover:text-indigo-400 transition-colors">
+            <a href="#" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Contact Us
             </a>
           </div>
