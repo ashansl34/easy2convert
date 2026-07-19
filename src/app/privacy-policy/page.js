@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen flex flex-col justify-between font-sans bg-[#030712] text-gray-200 selection:bg-emerald-950 selection:text-white">
+    <div className="min-h-screen flex flex-col justify-between font-sans bg-slate-50 text-slate-800 selection:bg-emerald-100 selection:text-emerald-950">
       
       {/* Header */}
       <Header currentPage="privacy-policy" />
@@ -20,7 +20,7 @@ export default function PrivacyPolicy() {
         <div className="mb-8">
           <a
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-emerald-400 transition-colors bg-[#0b0f19] border border-gray-900 hover:border-emerald-900/50 px-4 py-2 rounded-xl"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-755 hover:text-emerald-600 transition-colors bg-white border border-slate-200 hover:border-emerald-200 px-4 py-2.5 rounded-xl shadow-sm hover:shadow"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -30,25 +30,25 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Content Box */}
-        <div className="bg-[#0b0f19] border border-gray-900 rounded-2xl shadow-xl p-6 md:p-10 space-y-8">
+        <div className="bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/50 p-6 md:p-10 space-y-8">
           
           <div>
-            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-full border border-emerald-900/40">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
               Legal
             </span>
-            <h1 className="text-3xl font-extrabold text-white tracking-tight mt-3">
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-3">
               Privacy Policy for easy2convert.xyz
             </h1>
-            <p className="text-xs text-gray-500 mt-2 font-medium">
+            <p className="text-xs text-slate-400 mt-2 font-semibold">
               Effective Date: July 19, 2026
             </p>
           </div>
 
-          <div className="border-t border-gray-900 pt-6 space-y-6 text-sm text-gray-300 leading-relaxed">
+          <div className="border-t border-slate-200 pt-6 space-y-6 text-sm text-slate-600 leading-relaxed">
             
             {/* Section 1 */}
             <section className="space-y-3">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
                 1. Introduction
               </h2>
@@ -59,14 +59,14 @@ export default function PrivacyPolicy() {
 
             {/* Section 2 */}
             <section className="space-y-3">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
                 2. Information We Collect
               </h2>
               <p>
                 Like many other websites, easy2convert.xyz collects standard technical data to monitor site health and performance:
               </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-gray-400">
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-500 font-medium">
                 <li><strong>Log Files:</strong> We analyze visitor activity through internet protocol (IP) addresses, browser specification types, Internet Service Provider (ISP) tags, referring/exit pages, and date/time stamps.</li>
                 <li><strong>Local Cache:</strong> Standard browser cache states and service workers keep scripts running quickly. No personal inputs are compiled or retained.</li>
                 <li><strong>Calculators Data:</strong> Mathematical values entered within designer and developer calculators remain inside temporary page memory state variables and are cleared on page reloads.</li>
@@ -75,7 +75,7 @@ export default function PrivacyPolicy() {
 
             {/* Section 3 */}
             <section className="space-y-3">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
                 3. Google AdSense & DoubleClick Cookie
               </h2>
@@ -89,7 +89,7 @@ export default function PrivacyPolicy() {
 
             {/* Section 4 */}
             <section className="space-y-3">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
                 4. Third-Party Privacy Policies
               </h2>
@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
 
             {/* Section 5 */}
             <section className="space-y-3">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
                 5. Children's Information
               </h2>
@@ -114,14 +114,14 @@ export default function PrivacyPolicy() {
 
             {/* Section 6 */}
             <section className="space-y-3">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <span className="w-1.5 h-6 bg-emerald-500 rounded-full"></span>
                 6. Contact Us
               </h2>
               <p>
                 If you have any questions or require more information about our Privacy Policy, do not hesitate to contact us at:
               </p>
-              <p className="bg-[#030712] border border-gray-900 p-4 rounded-xl font-mono text-xs inline-block text-emerald-400 select-text">
+              <p className="bg-slate-50 border border-slate-200 p-4 rounded-xl font-mono text-xs inline-block text-emerald-700 select-text">
                 support@easy2convert.xyz
               </p>
             </section>
@@ -132,24 +132,24 @@ export default function PrivacyPolicy() {
       </main>
 
       {/* Footer */}
-      <footer className="w-full bg-[#030712] border-t border-gray-900 py-8 px-6">
+      <footer className="w-full bg-white border-t border-slate-200 py-8 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="text-xs text-gray-500 font-semibold">
+            <p className="text-xs text-slate-505 font-bold">
               © {new Date().getFullYear()} easy2convert.xyz. All rights reserved.
             </p>
-            <p className="text-[10px] text-gray-500 mt-1 leading-relaxed max-w-md">
+            <p className="text-[10px] text-slate-400 mt-1 leading-relaxed max-w-md font-semibold">
               Secure client-side cryptography. Images and files are processed strictly inside sandboxed browser memory. Files are never uploaded to any remote server, guaranteeing absolute confidentiality.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="/privacy-policy" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="/privacy-policy" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Privacy Policy
             </a>
-            <a href="#" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="/terms-and-conditions" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Terms of Service
             </a>
-            <a href="#" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="#" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Contact Us
             </a>
           </div>

@@ -54,7 +54,7 @@ export default function AntiGravityBackground() {
           `rgba(99, 102, 241, `,  // Indigo
           `rgba(16, 185, 129, `,  // Emerald/Mint
           `rgba(6, 182, 212, `,   // Cyan
-          `rgba(226, 232, 240, `  // Light gray
+          `rgba(100, 116, 139, `  // Slate gray (for high-contrast light mode)
         ];
         this.colorPrefix = colors[Math.floor(Math.random() * colors.length)];
       }

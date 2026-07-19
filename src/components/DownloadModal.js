@@ -34,16 +34,16 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/40 backdrop-blur-md transition-opacity duration-300"
+        className="fixed inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity duration-300"
         onClick={isReady ? onClose : undefined}
       />
 
       {/* Modal Card */}
-      <div className="bg-[#0b0f19] rounded-2xl border border-gray-900 shadow-2xl shadow-black/80 p-6 w-full max-w-md relative z-10 transform scale-100 transition-all duration-300 flex flex-col items-center">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-2xl shadow-slate-200/50 p-6 w-full max-w-md relative z-10 transform scale-100 transition-all duration-300 flex flex-col items-center">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-300 transition-colors"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
           aria-label="Close"
         >
           <svg
@@ -64,10 +64,10 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
 
         {/* Header */}
         <div className="text-center w-full mb-4">
-          <h3 className="text-lg font-bold text-white tracking-tight">
+          <h3 className="text-lg font-bold text-slate-900 tracking-tight">
             {isReady ? "Download Ready!" : "Processing Secure Download..."}
           </h3>
-          <p className="text-xs text-gray-400 mt-1 truncate max-w-xs mx-auto">
+          <p className="text-xs text-slate-500 mt-1 truncate max-w-xs mx-auto font-medium">
             File: {fileName}
           </p>
         </div>
@@ -75,7 +75,7 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
         {/* Countdown Visualizer */}
         <div className="flex items-center justify-center mb-6">
           {isReady ? (
-            <div className="w-16 h-16 bg-emerald-950/30 rounded-full flex items-center justify-center text-emerald-400 border border-emerald-900/40 animate-bounce">
+            <div className="w-16 h-16 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-full flex items-center justify-center animate-bounce shadow-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -94,12 +94,12 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
           ) : (
             <div className="relative w-16 h-16 flex items-center justify-center">
               {/* Outer ticking circle */}
-              <div className="absolute inset-0 rounded-full border-4 border-gray-900" />
+              <div className="absolute inset-0 rounded-full border-4 border-slate-100" />
               <div
-                className="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"
+                className="absolute inset-0 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin"
                 style={{ animationDuration: "1s" }}
               />
-              <span className="text-xl font-extrabold text-indigo-400">
+              <span className="text-xl font-extrabold text-emerald-500">
                 {countdown}
               </span>
             </div>
@@ -108,7 +108,7 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
 
         {/* Large Ad Space */}
         <div className="w-full flex justify-center mb-6">
-          <AdPlaceholder type="modal" className="border-gray-900 bg-gray-950/60" />
+          <AdPlaceholder type="modal" className="border-slate-200 bg-slate-50/80" />
         </div>
 
         {/* Action Button */}
@@ -119,7 +119,7 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
                 onDownload();
                 onClose();
               }}
-              className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-semibold rounded-xl transition-all duration-200 shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/35 text-sm tracking-wide animate-pulse flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:scale-[1.01] active:scale-[0.99] text-white font-bold rounded-xl transition-all duration-200 shadow-md shadow-emerald-500/10 text-sm tracking-wide flex items-center justify-center gap-2 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -140,10 +140,10 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
           ) : (
             <button
               disabled
-              className="w-full py-3.5 bg-gray-950 text-gray-500 font-medium rounded-xl text-sm border border-gray-900 cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-slate-100 text-slate-400 font-bold rounded-xl text-sm border border-slate-200 cursor-not-allowed flex items-center justify-center gap-2"
             >
               <svg
-                className="animate-spin -ml-1 mr-2 h-4.5 w-4.5 text-gray-500"
+                className="animate-spin -ml-1 mr-2 h-4.5 w-4.5 text-slate-400"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -168,7 +168,7 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
         </div>
 
         {/* Privacy Note */}
-        <p className="text-[10px] text-gray-500 mt-3 text-center">
+        <p className="text-[10px] text-slate-400 mt-3 text-center font-medium">
           Secure client-side processing. Your file never leaves your device.
         </p>
       </div>

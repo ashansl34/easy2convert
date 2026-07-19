@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #030712;
-  --foreground: #f9fafb;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
 @theme {
@@ -16,7 +16,7 @@ body {
   color: var(--color-foreground);
 }
 
-/* Custom scrollbar for file queue to look sleek and modern in dark mode */
+/* Custom scrollbar for file queue to look sleek and modern in light mode */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -27,10 +27,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1f2937;
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: #94a3b8;
 }

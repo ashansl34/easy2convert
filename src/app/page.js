@@ -436,33 +436,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between font-sans bg-[#030712] text-gray-200 selection:bg-indigo-950 selection:text-white select-none">
+    <div className="min-h-screen flex flex-col justify-between font-sans bg-slate-50 text-slate-800 selection:bg-emerald-100 selection:text-emerald-950 select-none">
       
       {/* 1. Header: Logo + Simple Navigation */}
       <Header currentPage="home" onScrollTo={handleScrollTo} />
 
-
-
       {/* 2. Core WebP/HEIC Converter Tool Zone */}
       <section ref={converterRef} className="w-full max-w-3xl mx-auto px-4 md:px-6 py-10 flex flex-col items-center justify-center">
           
-          {/* Main Converter Card - Anti-gravity background restricted to this box */}
-          <div className="w-full bg-[#0b0f19] border border-gray-900 rounded-2xl shadow-2xl shadow-black/80 p-6 md:p-8 backdrop-blur-md relative overflow-hidden transition-all duration-300">
+          {/* Main Converter Card */}
+          <div className="w-full bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/50 p-6 md:p-8 relative overflow-hidden transition-all duration-300">
             
-            {/* Embedded Anti-Gravity Particle Canvas specifically here */}
+            {/* Embedded Anti-Gravity Particle Canvas */}
             <AntiGravityBackground />
 
             {/* Content inside the card remains visible above canvas */}
             <div className="relative z-10">
               {/* Card Slogan */}
               <div className="text-center mb-8">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-full border border-emerald-900/40">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                   Micro-Niche Optimizer
                 </span>
-                <h2 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mt-2.5">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-2.5">
                   All-in-One Fast Online File Converter
                 </h2>
-                <p className="text-sm text-gray-400 mt-2 max-w-md mx-auto leading-relaxed">
+                <p className="text-sm text-slate-500 mt-2 max-w-md mx-auto leading-relaxed">
                   Fast client-side transformation. Convert DOCX, PDF, HEIC, WebP, PNG, and JPG locally without uploading anything to remote servers.
                 </p>
               </div>
@@ -477,8 +475,8 @@ export default function Home() {
                   onClick={onButtonClick}
                   className={`w-full py-12 px-6 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 ${
                     dragActive
-                      ? "border-emerald-500 bg-emerald-950/20 scale-[1.01] shadow-inner"
-                      : "border-gray-800 bg-[#0e1422]/60 hover:border-emerald-500 hover:bg-[#12192c]/75 hover:shadow-md"
+                      ? "border-emerald-500 bg-emerald-50 scale-[1.01] shadow-inner"
+                      : "border-slate-200 bg-slate-50 hover:border-emerald-500 hover:bg-slate-100/50 hover:shadow-md hover:shadow-slate-100"
                   }`}
                 >
                   <input
@@ -489,7 +487,7 @@ export default function Home() {
                     onChange={handleFileChange}
                   />
                   
-                  <div className="w-14 h-14 bg-emerald-950/40 rounded-2xl flex items-center justify-center text-emerald-400 border border-emerald-900/30 mb-4 shadow-sm">
+                  <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 border border-emerald-200 mb-4 shadow-sm">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -506,15 +504,15 @@ export default function Home() {
                     </svg>
                   </div>
                   
-                  <p className="text-sm font-bold text-gray-200">
+                  <p className="text-sm font-bold text-slate-800">
                     Drag & drop your file here
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-slate-400 mt-1 font-medium">
                     Supports DOCX, PDF, HEIC, WebP, PNG, JPG (Max 50MB)
                   </p>
                   <button
                     type="button"
-                    className="mt-6 py-4 px-8 bg-emerald-600 hover:bg-emerald-700 hover:scale-105 active:scale-98 text-white font-bold rounded-xl text-lg shadow-lg shadow-emerald-950/50 border border-emerald-500/30 transition-all duration-300 ease-out"
+                    className="mt-6 py-4 px-8 bg-gradient-to-r from-emerald-500 to-teal-600 hover:scale-105 active:scale-98 text-white font-bold rounded-xl text-lg shadow-lg shadow-emerald-600/10 border border-emerald-500/10 transition-all duration-300 ease-out cursor-pointer"
                   >
                     Browse Files
                   </button>
@@ -524,9 +522,9 @@ export default function Home() {
                 <div className="w-full space-y-6 transition-all duration-500 animate-fade-in">
                   
                   {/* File Info Card */}
-                  <div className="border border-gray-900 rounded-xl bg-[#030712] p-4 flex items-center justify-between gap-4">
+                  <div className="border border-slate-200 rounded-xl bg-slate-50 p-4 flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-10 h-10 bg-gray-950 rounded-lg flex items-center justify-center text-gray-500 border border-gray-900 flex-shrink-0">
+                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-slate-400 border border-slate-200 flex-shrink-0">
                         {selectedFile.name.toLowerCase().endsWith(".pdf") ? (
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-red-500">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -542,10 +540,10 @@ export default function Home() {
                         )}
                       </div>
                       <div className="min-w-0 font-medium">
-                        <p className="text-xs font-bold text-gray-200 truncate max-w-xs md:max-w-md" title={selectedFile.name}>
+                        <p className="text-xs font-bold text-slate-800 truncate max-w-xs md:max-w-md" title={selectedFile.name}>
                           {selectedFile.name}
                         </p>
-                        <p className="text-[10px] text-gray-500">
+                        <p className="text-[10px] text-slate-400 font-semibold">
                           {formatSize(selectedFile.size)}
                         </p>
                       </div>
@@ -554,7 +552,7 @@ export default function Home() {
                     {conversionStatus === "idle" && (
                       <button
                         onClick={() => setSelectedFile(null)}
-                        className="p-1.5 text-gray-500 hover:text-gray-300 hover:bg-gray-900 rounded-lg transition-all cursor-pointer"
+                        className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-200 rounded-lg transition-all cursor-pointer"
                         aria-label="Deselect file"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
@@ -568,7 +566,7 @@ export default function Home() {
                   {conversionStatus === "idle" && (
                     <div className="space-y-4 animate-fade-in duration-300">
                       <div className="text-left">
-                        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                        <h4 className="text-xs font-bold text-slate-400 uppercase tracking-widest">
                           Select Output Format
                         </h4>
                       </div>
@@ -580,8 +578,8 @@ export default function Home() {
                             onClick={() => setTargetFormat(format)}
                             className={`py-3.5 px-4 rounded-xl border text-sm font-bold uppercase transition-all duration-200 cursor-pointer ${
                               targetFormat === format
-                                ? "border-emerald-500 bg-emerald-950/20 text-emerald-400 shadow-md shadow-emerald-950/10"
-                                : "border-gray-800 bg-[#030712] text-gray-400 hover:border-gray-700 hover:text-gray-200"
+                                ? "border-emerald-500 bg-emerald-50 text-emerald-600 shadow-md shadow-emerald-500/10"
+                                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-800 hover:bg-slate-50"
                             }`}
                           >
                             {format === "Compress" ? "COMPRESS" : `TO ${format}`}
@@ -591,10 +589,10 @@ export default function Home() {
 
                       {/* Compression slider */}
                       {targetFormat === "Compress" && !selectedFile.name.toLowerCase().endsWith(".pdf") && (
-                        <div className="bg-[#030712] border border-gray-900 rounded-xl p-4 space-y-2 max-w-md">
-                          <div className="flex justify-between text-xs font-bold text-gray-400">
+                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 max-w-md">
+                          <div className="flex justify-between text-xs font-bold text-slate-505">
                             <span>Target Compression Quality</span>
-                            <span className="text-emerald-400">{compressionQuality}%</span>
+                            <span className="text-emerald-600">{compressionQuality}%</span>
                           </div>
                           <input
                             type="range"
@@ -602,9 +600,9 @@ export default function Home() {
                             max="90"
                             value={compressionQuality}
                             onChange={(e) => setCompressionQuality(parseInt(e.target.value))}
-                            className="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                            className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-505"
                           />
-                          <p className="text-[10px] text-gray-500">
+                          <p className="text-[10px] text-slate-400 font-semibold">
                             Lower quality values yields higher compression and smaller file dimensions.
                           </p>
                         </div>
@@ -614,12 +612,12 @@ export default function Home() {
 
                   {/* Converting State / Progress Bar */}
                   {conversionStatus === "converting" && (
-                    <div className="w-full bg-[#030712] border border-gray-900 rounded-xl p-5 space-y-3">
+                    <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
                       <div className="flex justify-between items-center text-xs font-bold">
-                        <span className="text-emerald-400 animate-pulse">Converting file locally...</span>
-                        <span className="text-emerald-400">{conversionProgress}%</span>
+                        <span className="text-emerald-600 animate-pulse">Converting file locally...</span>
+                        <span className="text-emerald-600">{conversionProgress}%</span>
                       </div>
-                      <div className="w-full bg-gray-950 rounded-full h-2 overflow-hidden">
+                      <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
                         <div
                           className="bg-gradient-to-r from-emerald-500 to-teal-600 h-full rounded-full transition-all duration-150"
                           style={{ width: `${conversionProgress}%` }}
@@ -630,22 +628,22 @@ export default function Home() {
 
                   {/* Completed State */}
                   {conversionStatus === "completed" && (
-                    <div className="w-full bg-[#030712] border border-gray-900 rounded-xl p-5 space-y-4 text-center">
-                      <div className="inline-flex w-12 h-12 bg-emerald-950/30 rounded-full items-center justify-center text-emerald-400 border border-emerald-900/40 mb-1">
+                    <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4 text-center">
+                      <div className="inline-flex w-12 h-12 bg-emerald-50 border border-emerald-200 rounded-full items-center justify-center text-emerald-600 mb-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" className="w-6 h-6">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white">Conversion Successful!</h4>
-                        <p className="text-xs text-gray-400 mt-1 max-w-sm mx-auto">
+                        <h4 className="text-sm font-bold text-slate-800">Conversion Successful!</h4>
+                        <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto font-medium">
                           File is converted to <strong>{convertedFileName}</strong>.
                         </p>
                         {convertedFileSize && (
-                          <p className="text-[10px] text-gray-500 mt-0.5">
+                          <p className="text-[10px] text-slate-400 mt-0.5 font-semibold">
                             Original: {formatSize(selectedFile.size)} → Output: {formatSize(convertedFileSize)} 
                             {convertedFileSize < selectedFile.size && (
-                              <span className="text-emerald-400 ml-1">
+                              <span className="text-emerald-600 ml-1">
                                 (-{Math.round(((selectedFile.size - convertedFileSize) / selectedFile.size) * 100)}%)
                               </span>
                             )}
@@ -655,13 +653,13 @@ export default function Home() {
                       <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
                         <button
                           onClick={() => triggerDownloadFlow({ convertedName: convertedFileName, downloadUrl: convertedFileUrl })}
-                          className="py-3 px-6 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold rounded-xl text-sm transition-all shadow-md shadow-emerald-900/30 cursor-pointer"
+                          className="py-3 px-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:scale-[1.01] active:scale-95 text-white font-bold rounded-xl text-sm transition-all shadow-md shadow-emerald-600/10 cursor-pointer"
                         >
                           Download Converted File
                         </button>
                         <button
                           onClick={() => setSelectedFile(null)}
-                          className="py-3 px-6 bg-gray-900 hover:bg-gray-800 text-gray-300 font-bold rounded-xl text-sm border border-gray-800 transition-all cursor-pointer"
+                          className="py-3 px-6 bg-white hover:bg-slate-100 text-slate-700 font-bold rounded-xl text-sm border border-slate-200 transition-all cursor-pointer"
                         >
                           Convert Another File
                         </button>
@@ -676,8 +674,8 @@ export default function Home() {
                       disabled={!targetFormat}
                       className={`w-full py-4 rounded-xl text-sm font-extrabold uppercase tracking-widest transition-all duration-300 ${
                         targetFormat
-                          ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-950/40 hover:scale-[1.01] hover:shadow-emerald-950/60 active:scale-98 cursor-pointer"
-                          : "bg-gray-950 text-gray-600 border border-gray-900 cursor-not-allowed"
+                          ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md shadow-emerald-600/10 hover:scale-[1.01] hover:shadow-emerald-600/20 active:scale-98 cursor-pointer"
+                          : "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
                       }`}
                     >
                       Convert Now
@@ -690,9 +688,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Quick conversion tags */}
+          {/* Quick Actions */}
           <div className="flex flex-col items-center justify-center gap-4 mt-6 max-w-2xl text-center">
-            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">
+            <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">
               Quick Actions:
             </span>
             <div className="flex flex-wrap items-center justify-center gap-3">
@@ -700,7 +698,7 @@ export default function Home() {
                 <button
                   key={tag}
                   onClick={onButtonClick}
-                  className="text-sm md:text-base font-semibold text-gray-300 bg-[#0e1422] border border-gray-800 rounded-xl py-3 px-6 hover:border-emerald-500 hover:bg-[#12192c] hover:text-emerald-400 hover:scale-105 active:scale-95 transition-all duration-300 shadow-md cursor-pointer"
+                  className="text-sm md:text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl py-3 px-6 hover:border-emerald-500 hover:bg-emerald-50/20 hover:text-emerald-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm cursor-pointer"
                 >
                   {tag}
                 </button>
@@ -711,61 +709,61 @@ export default function Home() {
       </section>
 
       {/* 3. Detailed User Guide & Content Section */}
-      <section className="w-full bg-[#0b0f19] border-t border-gray-900 py-16 px-6">
+      <section className="w-full bg-slate-50 border-t border-slate-200 py-16 px-6">
         <div className="max-w-4xl mx-auto space-y-16">
           
           {/* Step-by-Step Guide */}
           <div ref={guideRef} className="space-y-6 scroll-mt-24">
             <div className="text-center">
-              <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+              <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight">
                 How to Convert WebP to JPG or PNG?
               </h3>
-              <p className="text-xs text-gray-400 mt-1 max-w-md mx-auto">
+              <p className="text-xs text-slate-500 mt-1 max-w-md mx-auto font-medium">
                 Convert files in three easy, serverless steps using our local browser engine.
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-              <div className="border border-gray-900 rounded-2xl p-6 bg-[#030712]/40 relative hover:shadow-md transition-shadow">
-                <span className="w-8 h-8 bg-indigo-950/60 rounded-xl flex items-center justify-center text-indigo-400 font-extrabold text-sm border border-indigo-900/40">
+              <div className="border border-slate-200 rounded-2xl p-6 bg-white relative shadow-sm hover:shadow-md transition-shadow">
+                <span className="w-8 h-8 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-700 font-extrabold text-sm border border-emerald-200">
                   1
                 </span>
-                <h4 className="text-sm font-bold text-white mt-4">Select or Drag Files</h4>
-                <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+                <h4 className="text-sm font-bold text-slate-900 mt-4">Select or Drag Files</h4>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
                   Drag and drop your `.webp` or `.heic` images directly into the active upload container, or browse locally from your device.
                 </p>
               </div>
 
-              <div className="border border-gray-900 rounded-2xl p-6 bg-[#030712]/40 relative hover:shadow-md transition-shadow">
-                <span className="w-8 h-8 bg-indigo-950/60 rounded-xl flex items-center justify-center text-indigo-400 font-extrabold text-sm border border-indigo-900/40">
+              <div className="border border-slate-200 rounded-2xl p-6 bg-white relative shadow-sm hover:shadow-md transition-shadow">
+                <span className="w-8 h-8 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-700 font-extrabold text-sm border border-emerald-200">
                   2
                 </span>
-                <h4 className="text-sm font-bold text-white mt-4">Choose Output Format</h4>
-                <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+                <h4 className="text-sm font-bold text-slate-900 mt-4">Choose Output Format</h4>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
                   Select the conversion target (`JPG` or `PNG`) or click `COMPRESS` and adjust the quality factor using the slider.
                 </p>
               </div>
 
-              <div className="border border-gray-900 rounded-2xl p-6 bg-[#030712]/40 relative hover:shadow-md transition-shadow">
-                <span className="w-8 h-8 bg-indigo-950/60 rounded-xl flex items-center justify-center text-indigo-400 font-extrabold text-sm border border-indigo-900/40">
+              <div className="border border-slate-200 rounded-2xl p-6 bg-white relative shadow-sm hover:shadow-md transition-shadow">
+                <span className="w-8 h-8 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-700 font-extrabold text-sm border border-emerald-200">
                   3
                 </span>
-                <h4 className="text-sm font-bold text-white mt-4">Process & Download</h4>
-                <p className="text-xs text-gray-400 mt-2 leading-relaxed">
+                <h4 className="text-sm font-bold text-slate-900 mt-4">Process & Download</h4>
+                <p className="text-xs text-slate-500 mt-2 leading-relaxed">
                   Click 'Process'. The client-side sandboxed engine will transform your files. Unlock and download after the 5s ad timer.
                 </p>
               </div>
             </div>
           </div>
 
-          <hr className="border-gray-900" />
+          <hr className="border-slate-200" />
 
           {/* Section 1: What is WebP */}
           <div ref={webpRef} className="space-y-4 scroll-mt-24">
-            <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+            <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight">
               What is WebP and Why do Browsers Use it?
             </h3>
-            <div className="text-sm text-gray-300 space-y-4 leading-relaxed">
+            <div className="text-sm text-slate-600 space-y-4 leading-relaxed">
               <p>
                 <strong>WebP</strong> is a modern image format developed by Google specifically for the web. It provides superior lossy and lossless compression for images online. Utilizing WebP, web developers and webmasters can create smaller, richer images that make web pages load faster, improving the overall browsing experience.
               </p>
@@ -778,61 +776,61 @@ export default function Home() {
             </div>
           </div>
 
-          <hr className="border-gray-900" />
+          <hr className="border-slate-200" />
 
           {/* Section 2: Image Quality Analysis */}
           <div ref={qualityRef} className="space-y-4 scroll-mt-24">
-            <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+            <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight">
               Image Quality Analysis: WebP vs JPG / PNG
             </h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed">
               When deciding whether to maintain WebP format or convert back to traditional JPG or PNG, it's crucial to understand how compression details impact detail preservation:
             </p>
             <div className="overflow-x-auto pt-2">
-              <table className="w-full text-left border-collapse text-xs">
+              <table className="w-full text-left border-collapse text-xs border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                 <thead>
-                  <tr className="border-b border-gray-900 text-gray-400 font-bold uppercase tracking-wider">
+                  <tr className="bg-slate-100 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider">
                     <th className="py-3 px-4">Feature</th>
                     <th className="py-3 px-4">WebP</th>
                     <th className="py-3 px-4">JPEG / JPG</th>
                     <th className="py-3 px-4">PNG</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-900 text-gray-300">
-                  <tr>
-                    <td className="py-3 px-4 font-bold text-gray-200">Compression Type</td>
-                    <td className="py-3 px-4">Lossy & Lossless (Predictive)</td>
-                    <td className="py-3 px-4">Lossy Only (Block DCT)</td>
-                    <td className="py-3 px-4">Lossless Only (Deflate)</td>
+                <tbody className="divide-y divide-slate-200 bg-white">
+                  <tr className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                    <td className="py-3 px-4 font-bold text-slate-800">Lossy Compression</td>
+                    <td className="py-3 px-4 text-emerald-600 font-bold">Yes (Sleek Efficiency)</td>
+                    <td className="py-3 px-4">Yes (High Loss)</td>
+                    <td className="py-3 px-4">No (Lossless only)</td>
                   </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold text-gray-200">Average File Size</td>
-                    <td className="py-3 px-4 text-emerald-400 font-semibold">Very Small (Optimized)</td>
-                    <td className="py-3 px-4">Medium</td>
-                    <td className="py-3 px-4">Large</td>
+                  <tr className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                    <td className="py-3 px-4 font-bold text-slate-800">Lossless Mode</td>
+                    <td className="py-3 px-4 text-emerald-600 font-bold">Yes (Highly Optimized)</td>
+                    <td className="py-3 px-4">No</td>
+                    <td className="py-3 px-4">Yes (Uncompressed size)</td>
                   </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold text-gray-200">Transparency Support</td>
-                    <td className="py-3 px-4">Yes (8-bit Alpha Channel)</td>
+                  <tr className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                    <td className="py-3 px-4 font-bold text-slate-800">Transparency Support</td>
+                    <td className="py-3 px-4 text-emerald-600 font-bold">Yes</td>
                     <td className="py-3 px-4">No</td>
                     <td className="py-3 px-4">Yes</td>
                   </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold text-gray-200">Compression Artifacts</td>
+                  <tr className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                    <td className="py-3 px-4 font-bold text-slate-800">Compression Artifacts</td>
                     <td className="py-3 px-4">Smooth blur at high compression</td>
                     <td className="py-3 px-4">Blocky DCT grids on edges</td>
                     <td className="py-3 px-4">None (Exact Pixel Match)</td>
                   </tr>
-                  <tr>
-                    <td className="py-3 px-4 font-bold text-gray-200">Compatibility Scope</td>
+                  <tr className="border-b border-slate-200 hover:bg-slate-50 transition-colors">
+                    <td className="py-3 px-4 font-bold text-slate-800">Compatibility Scope</td>
                     <td className="py-3 px-4">Modern Browsers & Systems</td>
-                    <td className="py-3 px-4 text-emerald-400 font-semibold">Universal (100% Compatible)</td>
-                    <td className="py-3 px-4 text-emerald-400 font-semibold">Universal (100% Compatible)</td>
+                    <td className="py-3 px-4 text-emerald-600 font-bold">Universal (100% Compatible)</td>
+                    <td className="py-3 px-4 text-emerald-600 font-bold">Universal (100% Compatible)</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 italic pt-2">
+            <p className="text-xs text-slate-400 italic pt-2 font-medium">
               Note: easy2convert.xyz utilizes local browser Canvas rendering pipelines which preserve pixel-perfect details during WebP decoding and JPEG/PNG exports.
             </p>
           </div>
@@ -841,13 +839,13 @@ export default function Home() {
       </section>
 
       {/* 3.5 FAQ Section */}
-      <section className="w-full bg-[#030712] border-t border-gray-900 py-16 px-6">
+      <section className="w-full bg-slate-50 border-t border-slate-200 py-16 px-6">
         <div className="max-w-4xl mx-auto space-y-6">
           <div className="text-center mb-8">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-400 bg-emerald-950/40 px-2.5 py-1 rounded-full border border-emerald-900/40">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
               Common Questions
             </span>
-            <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight mt-2">
+            <h3 className="text-xl md:text-2xl font-extrabold text-slate-900 tracking-tight mt-2">
               Frequently Asked Questions
             </h3>
           </div>
@@ -858,11 +856,11 @@ export default function Home() {
               return (
                 <div
                   key={idx}
-                  className="border border-gray-900 rounded-xl bg-[#0b0f19] overflow-hidden transition-all duration-300"
+                  className="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden transition-all duration-300"
                 >
                   <button
                     onClick={() => setExpandedFaq(isOpen ? null : idx)}
-                    className="w-full flex items-center justify-between p-5 text-left font-bold text-sm text-gray-200 hover:text-emerald-400 transition-colors"
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-sm text-slate-700 hover:text-emerald-600 transition-colors cursor-pointer"
                   >
                     <span>{faq.question}</span>
                     <svg
@@ -871,7 +869,7 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       strokeWidth={2.5}
                       stroke="currentColor"
-                      className={`w-4 h-4 text-emerald-400 transition-transform duration-300 ${
+                      className={`w-4 h-4 text-emerald-500 transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
@@ -880,10 +878,10 @@ export default function Home() {
                   </button>
                   <div
                     className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                      isOpen ? "max-h-40 border-t border-gray-900" : "max-h-0"
+                      isOpen ? "max-h-40 border-t border-slate-100" : "max-h-0"
                     }`}
                   >
-                    <p className="p-5 text-xs text-gray-400 leading-relaxed bg-[#030712]/30">
+                    <p className="p-5 text-xs text-slate-500 leading-relaxed bg-slate-50/50 font-medium">
                       {faq.answer}
                     </p>
                   </div>
@@ -895,24 +893,24 @@ export default function Home() {
       </section>
 
       {/* 4. Footer: Privacy Policy | Terms | Contact Us */}
-      <footer className="w-full bg-[#030712] border-t border-gray-900 py-8 px-6">
+      <footer className="w-full bg-white border-t border-slate-200 py-8 px-6">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <p className="text-xs text-gray-500 font-semibold">
+            <p className="text-xs text-slate-500 font-bold">
               © {new Date().getFullYear()} easy2convert.xyz. All rights reserved.
             </p>
-            <p className="text-[10px] text-gray-500 mt-1 leading-relaxed max-w-md">
+            <p className="text-[10px] text-slate-400 mt-1 leading-relaxed max-w-md font-semibold">
               Secure client-side cryptography. Images and files are processed strictly inside sandboxed browser memory. Files are never uploaded to any remote server, guaranteeing absolute confidentiality.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <a href="/privacy-policy" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="/privacy-policy" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Privacy Policy
             </a>
-            <a href="/terms-and-conditions" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="/terms-and-conditions" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Terms of Service
             </a>
-            <a href="#" className="bg-[#0b0f19] text-gray-400 hover:text-emerald-400 border border-gray-900 hover:border-emerald-900/50 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="#" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Contact Us
             </a>
           </div>
