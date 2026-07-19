@@ -15,8 +15,8 @@ export const viewport = {
 
 export const metadata = {
   title: "Easy2Convert - Premium Client-Side Image File Converter",
-  description: "Convert HEIC to JPG, WebP to PNG/JPG, and standard images locally in your browser. 100% serverless, private, and secure. Zero upload required.",
-  keywords: "HEIC to JPG, WebP to PNG, WebP to JPG, image converter, client side image converter, HEIC converter, local image conversion, fast image converter",
+  description: "Fast, 100% client-side online file converter for PDF, WebP, HEIC, and a powerful online calculator suite for developers, designers, and students.",
+  keywords: "HEIC to JPG, WebP to PNG, WebP to JPG, image converter, client side image converter, HEIC converter, local image conversion, fast image converter, online calculator, nil calculator, free web calculator, utility calculator, web calculator tool",
 };
 
 export default function RootLayout({ children }) {

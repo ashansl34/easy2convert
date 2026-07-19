@@ -130,7 +130,10 @@ export default function CalculatorsPage() {
           <h2 className="text-3xl font-extrabold text-white tracking-tight mt-2.5">
             Developer & Designer Utility Calculators
           </h2>
-          <p className="text-sm text-gray-400 mt-2 max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-emerald-400/80 font-semibold mt-2.5 max-w-md mx-auto leading-relaxed">
+            Your all-in-one online calculator suite for lightning-fast local web computations without server lag.
+          </p>
+          <p className="text-xs text-gray-400 mt-2 max-w-md mx-auto leading-relaxed">
             Quick, reliable local calculators running directly in your browser. Absolutely zero uploads, server-calls, or data tracking.
           </p>
         </div>
