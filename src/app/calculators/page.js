@@ -392,7 +392,7 @@ export default function CalculatorsPage() {
             <a href="/" className="hover:text-emerald-400 transition-colors">
               Converter
             </a>
-            <a href="#" className="hover:text-emerald-400 transition-colors">
+            <a href="/privacy-policy" className="hover:text-emerald-400 transition-colors">
               Privacy Policy
             </a>
             <a href="#" className="hover:text-emerald-400 transition-colors">
