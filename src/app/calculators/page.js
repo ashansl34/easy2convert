@@ -395,7 +395,7 @@ export default function CalculatorsPage() {
             <a href="/privacy-policy" className="hover:text-emerald-400 transition-colors">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-emerald-400 transition-colors">
+            <a href="/terms-and-conditions" className="hover:text-emerald-400 transition-colors">
               Terms of Service
             </a>
           </div>
