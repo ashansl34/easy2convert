@@ -99,5 +99,5 @@ $$\text{Decreased Value} = \text{Original Value} \times \left(1 - \frac{\text{Pe
 
 ---
 
-### Need Instant Percentage Calculations?
-Don't waste time doing manual division in scratchpads. Use our free, instant [Percentage & Ratio Calculator](https://easy2convert.xyz/calculators) on **easy2convert.xyz** to compute percentage differences, increases, and layout ratios in real time!
+### Transform Metrics Text & Calculate Ratios
+Formatting statistical reports or design metrics? Use our free [Case Converter & Text Tool](https://easy2convert.xyz/case-converter) to adjust title casing, or compute layout ratios using our client-side [Percentage & Ratio Calculator](https://easy2convert.xyz/calculators)!

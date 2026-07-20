@@ -455,7 +455,7 @@ export default function Home() {
               {/* Card Slogan */}
               <div className="text-center mb-8">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
-                  Micro-Niche Optimizer
+                  100% Secure Client-Side Tools
                 </span>
                 <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-2.5">
                   All-in-One Fast Online File Converter
@@ -705,7 +705,111 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </section>
 
+      {/* Our Specialized Processing Tools Section */}
+      <section className="w-full max-w-5xl mx-auto px-4 md:px-6 py-10">
+        <div className="text-center mb-8">
+          <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+            Dedicated Utilities
+          </span>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight mt-2.5">
+            Our Specialized Processing Tools
+          </h2>
+          <p className="text-sm text-slate-500 mt-2 max-w-md mx-auto leading-relaxed">
+            High-performance, 100% serverless browser tools built for developers, designers, and privacy-conscious users.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Card 1: Image Format Converter */}
+          <a
+            href="/#converter"
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 border border-emerald-200 text-xl shadow-sm group-hover:scale-110 transition-transform">
+                🖼️
+              </div>
+              <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                Image Converter
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                Convert WebP, PNG, JPG, HEIC, and PDF files 100% locally in your browser sandbox with zero server uploads.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+              <span>Open Tool</span>
+              <span>→</span>
+            </div>
+          </a>
+
+          {/* Card 2: Base64 Encoder / Decoder */}
+          <a
+            href="/base64-converter"
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 border border-emerald-200 text-xl shadow-sm group-hover:scale-110 transition-transform">
+                ⚡
+              </div>
+              <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                Base64 Converter
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                Encode text to Base64 or transform images into Data URI strings instantly for web development workflows.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+              <span>Open Tool</span>
+              <span>→</span>
+            </div>
+          </a>
+
+          {/* Card 3: Text Case Converter */}
+          <a
+            href="/case-converter"
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 border border-emerald-200 text-xl shadow-sm group-hover:scale-110 transition-transform">
+                📝
+              </div>
+              <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                Text Case Converter
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                Transform text blocks into UPPERCASE, lowercase, Title Case, camelCase, or snake_case with live word counts.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+              <span>Open Tool</span>
+              <span>→</span>
+            </div>
+          </a>
+
+          {/* Card 4: SVG to PNG Converter */}
+          <a
+            href="/svg-converter"
+            className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all duration-300 flex flex-col justify-between group"
+          >
+            <div className="space-y-3">
+              <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 border border-emerald-200 text-xl shadow-sm group-hover:scale-110 transition-transform">
+                🎨
+              </div>
+              <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                SVG to PNG Converter
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                Rasterize vector SVG files into high-definition PNG or JPEG images with 1x to 4x Retina multipliers.
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+              <span>Open Tool</span>
+              <span>→</span>
+            </div>
+          </a>
+        </div>
       </section>
 
       {/* 3. Detailed User Guide & Content Section */}

@@ -127,7 +127,27 @@ export default function Calculators() {
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-2.5">
             Developer & Designer Utility Calculators
           </h2>
-          <p className="text-sm text-emerald-600 font-semibold mt-2.5 max-w-md mx-auto leading-relaxed">
+          
+          {/* Quick Tools Banner */}
+          <div className="flex flex-wrap justify-center gap-2 mt-4">
+            <a href="/base64-converter" className="text-xs font-bold text-slate-700 bg-white hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 px-3 py-1.5 rounded-lg shadow-sm transition-all">
+              ⚡ Base64 Converter
+            </a>
+            <a href="/case-converter" className="text-xs font-bold text-slate-700 bg-white hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 px-3 py-1.5 rounded-lg shadow-sm transition-all">
+              📝 Case Converter
+            </a>
+            <a href="/svg-converter" className="text-xs font-bold text-slate-700 bg-white hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 px-3 py-1.5 rounded-lg shadow-sm transition-all">
+              🎨 SVG to PNG/JPEG
+            </a>
+            <a href="/json-to-ts" className="text-xs font-bold text-slate-700 bg-white hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 px-3 py-1.5 rounded-lg shadow-sm transition-all">
+              🔷 JSON to TS
+            </a>
+            <a href="/avif-converter" className="text-xs font-bold text-slate-700 bg-white hover:text-emerald-600 border border-slate-200 hover:border-emerald-300 px-3 py-1.5 rounded-lg shadow-sm transition-all">
+              🖼️ AVIF Converter
+            </a>
+          </div>
+
+          <p className="text-sm text-emerald-600 font-semibold mt-4 max-w-md mx-auto leading-relaxed">
             Your all-in-one online calculator suite for lightning-fast local web computations without server lag.
           </p>
           <p className="text-xs text-slate-400 mt-2 max-w-md mx-auto leading-relaxed font-medium">

@@ -93,5 +93,5 @@ WebP is based on intra-frame prediction technology derived from the **VP8 video 
 
 ---
 
-### Convert Your Images Serverlessly
-Need to convert WebP images back to universally compatible JPG or PNG files for desktop editing? Use our free [WebP Converter](https://easy2convert.xyz) on **easy2convert.xyz** to transform image formats locally in your browser with zero server uploads!
+### Convert Images Between WebP, PNG, and JPEG
+Experience the compression power of modern web formats firsthand! Use our free, 100% private [Client-Side Image Converter](https://easy2convert.xyz) to convert graphics between WebP, PNG, and JPEG formats locally with zero server uploads!

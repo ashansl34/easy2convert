@@ -90,5 +90,5 @@ At **easy2convert.xyz**, document processing takes place entirely in your web br
 
 ---
 
-### Convert Your PDFs Privately
-Need to convert confidential PDFs to editable Word documents without risking document privacy? Try our free, 100% private [PDF to Word Converter](https://easy2convert.xyz) on **easy2convert.xyz**—no registration or server uploads required!
+### Format Text & Encode Data Privately
+Extracted text from a document and need to clean up capitalization? Use our free [Case Converter & Text Transformer](https://easy2convert.xyz/case-converter). Need to embed assets as inline code? Try our client-side [Base64 Encoder & Data URI Tool](https://easy2convert.xyz/base64-converter)!

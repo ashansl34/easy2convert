@@ -143,5 +143,5 @@ For standard browser configurations ($1\text{rem} = 16\text{px}$):
 
 ---
 
-### Need Quick Conversions for Your Stylesheets?
-Don't waste time calculating pixel-to-rem ratios manually. Use our free, instant [PX to REM Converter](https://easy2convert.xyz/calculators) on **easy2convert.xyz** to compute REM values for custom baseline font resets in real time!
+### Need Quick Casing & Text Tools for Your Stylesheets?
+When formatting CSS font variables or cleaning up design tokens, use our free [Case Converter & Text Transformer](https://easy2convert.xyz/case-converter) to transform class names into `camelCase` or `kebab-case` instantly. For unit calculations, try our client-side [PX to REM Calculator](https://easy2convert.xyz/calculators)!

@@ -131,5 +131,5 @@ export default function HeroBanner() {
 
 ---
 
-### Calculate Aspect Ratios for Crisp Assets
-Looking to maintain exact width and height ratios across your responsive containers? Use our free [Aspect Ratio Calculator](https://easy2convert.xyz/calculators) on **easy2convert.xyz** to compute target heights in real time!
+### Eliminate Layout Jumps & Optimize Page Speed
+Fix layout shifts by reserving image containers, then shrink image payloads by converting graphics to WebP using our free [Client-Side Image Converter](https://easy2convert.xyz). Need high-res raster logos? Try our [SVG to PNG Converter](https://easy2convert.xyz/svg-converter)!

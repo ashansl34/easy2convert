@@ -139,5 +139,5 @@ Beyond `clamp()`, front-end developers use `min()` and `max()` functions to prev
 
 ---
 
-### Calculate REM & Fluid Layout Metrics Easily
-Need to calculate REM values or convert pixel dimensions for your fluid CSS stylesheets? Try our free [PX to REM Converter](https://easy2convert.xyz/calculators) on **easy2convert.xyz** to compute responsive typography values instantly!
+### Transform Class Names & Calculate Fluid REM Metrics
+Writing responsive CSS rules? Use our free [Case Converter](https://easy2convert.xyz/case-converter) to format utility classes into `kebab-case`, and compute accessible REM units using our client-side [PX to REM Calculator](https://easy2convert.xyz/calculators)!

@@ -81,5 +81,5 @@ To ensure your link previews appear sharp and uncropped across mobile and deskto
 
 ---
 
-### Calculate Aspect Ratios Instantly
-Need to scale your marketing assets to custom dimensions without distorting visual proportions? Try our free [Aspect Ratio Calculator](https://easy2convert.xyz/calculators) on **easy2convert.xyz** to compute exact target heights in real time!
+### Optimize Social & Banner Assets Instantly
+Ready to convert graphics into modern WebP format for fast social card preview loading? Use our 100% private [Image Format Converter](https://easy2convert.xyz) to transform photos locally, or rasterize vector logos using our [SVG to PNG Converter](https://easy2convert.xyz/svg-converter)!
