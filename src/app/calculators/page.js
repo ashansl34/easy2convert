@@ -559,6 +559,9 @@ export default function Calculators() {
             <a href="/terms-and-conditions" className="hover:text-emerald-600 transition-colors">
               Terms of Service
             </a>
+            <a href="/contact" className="hover:text-emerald-600 transition-colors">
+              Contact Us
+            </a>
           </div>
         </div>
       </footer>

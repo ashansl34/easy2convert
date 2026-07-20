@@ -357,6 +357,9 @@ export default function Base64Converter() {
             <a href="/privacy-policy" className="hover:text-emerald-600 transition-colors">
               Privacy Policy
             </a>
+            <a href="/contact" className="hover:text-emerald-600 transition-colors">
+              Contact Us
+            </a>
           </div>
         </div>
       </footer>
