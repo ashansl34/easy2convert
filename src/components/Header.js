@@ -174,6 +174,18 @@ export default function Header({ currentPage = "home", onScrollTo }) {
           >
             Dev Calculators
           </a>
+
+          {/* Blog */}
+          <a
+            href="/blog"
+            className={`${
+              currentPage === "blog"
+                ? "bg-emerald-950/40 text-emerald-400 border border-emerald-900/60 font-bold"
+                : "bg-slate-950/40 text-slate-300 hover:text-white border border-slate-800/80"
+            } px-4 py-2 rounded-lg font-semibold text-xs text-center ${popAnim}`}
+          >
+            Blog
+          </a>
         </nav>
 
         <span className="flex items-center gap-1 bg-emerald-950/40 text-emerald-400 px-3 py-1 rounded-full border border-emerald-900/50 text-xs font-semibold">

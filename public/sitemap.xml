@@ -2,25 +2,145 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://easy2convert.xyz/</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://easy2convert.xyz/calculators</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://easy2convert.xyz/blog</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/viewport-units-vw-vh-vs-rem-fluid-responsive-layouts</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/how-to-calculate-percentage-increase-decrease</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/why-client-side-file-converters-are-safer-than-cloud</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/webp-vs-png-vs-jpeg-image-format-comparison</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/why-iphone-heic-images-dont-open-on-windows</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/pdf-to-docx-conversion-text-extraction-formatting</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/bytes-kb-mb-gb-tb-understanding-digital-storage</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/why-hard-drive-manufacturers-os-calculate-storage-differently</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/how-to-compress-images-web-performance-without-losing-quality</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/ultimate-cheat-sheet-image-aspect-ratios-social-media</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/how-to-calculate-target-dimensions-without-distortion</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/understanding-cumulative-layout-shift-cls-aspect-ratios</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/px-to-rem-vs-em-responsive-typography</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/how-to-calculate-px-to-rem-tailwind-bootstrap</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/dpi-vs-ppi-image-resolution-guide</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/heic-to-jpg-iphone-compatibility-guide</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/why-convert-webp-to-jpg</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/understanding-aspect-ratios-web-design</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://easy2convert.xyz/blog/css-pixels-vs-rem-units</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://easy2convert.xyz/privacy-policy</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://easy2convert.xyz/terms-and-conditions</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
