@@ -122,7 +122,7 @@ export default function PrivacyPolicy() {
                 If you have any questions or require more information about our Privacy Policy, do not hesitate to contact us at:
               </p>
               <p className="bg-slate-50 border border-slate-200 p-4 rounded-xl font-mono text-xs inline-block text-emerald-700 select-text">
-                support@easy2convert.xyz
+                propose2025123@gmail.com
               </p>
             </section>
 
@@ -149,7 +149,7 @@ export default function PrivacyPolicy() {
             <a href="/terms-and-conditions" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Terms of Service
             </a>
-            <a href="#" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
+            <a href="/contact" className="bg-slate-50 text-slate-600 hover:text-emerald-600 border border-slate-200 hover:border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors duration-200">
               Contact Us
             </a>
           </div>
