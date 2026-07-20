@@ -17,6 +17,14 @@ export const metadata = {
   title: "Easy2Convert - Premium Client-Side Image File Converter",
   description: "Fast, 100% client-side online file converter for PDF, WebP, HEIC, and a powerful online calculator suite for developers, designers, and students.",
   keywords: "HEIC to JPG, WebP to PNG, WebP to JPG, image converter, client side image converter, HEIC converter, local image conversion, fast image converter, online calculator, nil calculator, free web calculator, utility calculator, web calculator tool",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {

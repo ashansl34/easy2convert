@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://easy2convert.xyz/sitemap.xml
