@@ -240,6 +240,53 @@ export default function Calculators() {
                   <span className="text-xs text-slate-400 font-semibold">px</span>
                 </div>
               </div>
+
+              {/* Informative Text Container */}
+              <div className="mt-8 pt-6 border-t border-slate-200 text-left space-y-4 text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
+                <div>
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    Understanding PX to REM
+                  </span>
+                  <h4 className="text-sm font-bold text-slate-800 mt-2">
+                    What is this calculator and why use it?
+                  </h4>
+                  <p className="mt-1">
+                    The PX to REM Converter is an essential design-to-code utility built for web developers and UI designers. In digital layouts, <strong>Pixels (PX)</strong> represent absolute measurements bound to physical screen display densities. However, modern web standards prioritize accessibility and responsive typography, which is where <strong>Root Em (REM)</strong> units come in. REM units are relative sizes calculated dynamically based on the root font size settings defined by the user's browser.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">
+                    Step-by-Step Usage Guide:
+                  </h4>
+                  <ol className="list-decimal pl-5 mt-1 space-y-1">
+                    <li>Input your desired pixel size in the <strong>Pixels (px)</strong> field to immediately convert it to REM.</li>
+                    <li>Alternatively, type a REM value in the <strong>REM (rem)</strong> field to dynamically calculate the equivalent pixel dimensions.</li>
+                    <li>If your project scales on a non-default base (such as a 10px Tailwind layout reset), simply change the value in the <strong>Calculation Base</strong> field to adjust the conversion ratio dynamically.</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">
+                    Mathematical Conversion Formulas:
+                  </h4>
+                  <p className="mt-1">
+                    The conversion logic divides the target size by the baseline typography scale:
+                  </p>
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 my-2 font-mono text-[11px] text-emerald-700">
+                    REM Value = Target Pixels (px) / Base Font Size (px)
+                  </div>
+                  <p>
+                    For the reverse calculation, the relative REM unit is multiplied by the base size to recover absolute pixels:
+                  </p>
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 my-2 font-mono text-[11px] text-emerald-700">
+                    Pixel Value (px) = REM Value (rem) * Base Font Size (px)
+                  </div>
+                  <p>
+                    By transitioning styling sheets to relative REM values, you ensure that if an individual zooms their browser or overrides font sizes for visual convenience, your entire layout adjusts proportionally, meeting World Wide Web Consortium (W3C) accessibility guidelines.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
 
@@ -306,6 +353,53 @@ export default function Calculators() {
                   </div>
                 </div>
               </div>
+
+              {/* Informative Text Container */}
+              <div className="mt-8 pt-6 border-t border-slate-200 text-left space-y-4 text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
+                <div>
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    Understanding Aspect Ratio
+                  </span>
+                  <h4 className="text-sm font-bold text-slate-800 mt-2">
+                    What is this calculator and why use it?
+                  </h4>
+                  <p className="mt-1">
+                    The Aspect Ratio Calculator is a design tool that calculates proportional dimensions for images, videos, frames, and responsive UI components. It helps designers and front-end developers scale assets up or down without causing visual distortion, stretching, or unwanted cropping.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">
+                    Step-by-Step Usage Guide:
+                  </h4>
+                  <ol className="list-decimal pl-5 mt-1 space-y-1">
+                    <li>Input the original width and height of your design assets under the <strong>Original Size</strong> settings. The simplified aspect ratio (such as 16:9 or 4:3) is calculated dynamically.</li>
+                    <li>Enter your target width under the <strong>Target Calculation</strong> section.</li>
+                    <li>The application immediately calculates the required height, keeping the dimensions perfectly in scale.</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">
+                    Mathematical Calculations:
+                  </h4>
+                  <p className="mt-1">
+                    The calculator maintains a linear equation of proportions, where the ratio of original width to original height equals the ratio of target width to target height:
+                  </p>
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 my-2 font-mono text-[11px] text-emerald-700">
+                    Target Height = (Original Height / Original Width) * Target Width
+                  </div>
+                  <p>
+                    For example, to adapt a standard Full HD image (1920x1080) to a smaller 1280px wide container:
+                  </p>
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 my-2 font-mono text-[11px] text-emerald-700">
+                    Target Height = (1080 / 1920) * 1280 = 0.5625 * 1280 = 720px
+                  </div>
+                  <p>
+                    Maintaining mathematically precise aspect ratios prevents Cumulative Layout Shift (CLS) on web layout loads, optimizing Core Web Vitals performance scores.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
 
@@ -365,6 +459,56 @@ export default function Calculators() {
                 <div className="grid grid-cols-2 p-3.5 text-xs">
                   <span className="text-slate-500 font-bold">Terabytes (TB)</span>
                   <span className="text-slate-800 text-right font-extrabold">{dataConversions.tb} TB</span>
+                </div>
+              </div>
+
+              {/* Informative Text Container */}
+              <div className="mt-8 pt-6 border-t border-slate-200 text-left space-y-4 text-xs md:text-sm text-slate-600 leading-relaxed font-medium">
+                <div>
+                  <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    Understanding Data Sizes
+                  </span>
+                  <h4 className="text-sm font-bold text-slate-800 mt-2">
+                    What is this calculator and why use it?
+                  </h4>
+                  <p className="mt-1">
+                    The Data Size Converter is a digital scale utility that translates storage units between standard measurements including Bytes (B), Kilobytes (KB), Megabytes (MB), Gigabytes (GB), and Terabytes (TB). It helps software developers, server administrators, and database engineers calculate exact storage, configure upload limits, and estimate hosting capacities.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">
+                    Step-by-Step Usage Guide:
+                  </h4>
+                  <ol className="list-decimal pl-5 mt-1 space-y-1">
+                    <li>Type the numerical size you want to convert in the <strong>Enter Value</strong> field.</li>
+                    <li>Select the target unit (Bytes, KB, MB, GB, or TB) from the <strong>Unit</strong> dropdown.</li>
+                    <li>The system instantly calculates and displays the equivalent allocations across all digital sizes in the grid below.</li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-bold text-slate-800">
+                    Mathematical Binary Logics:
+                  </h4>
+                  <p className="mt-1">
+                    Unlike standard base-10 metrics (where 1 kilo equals 1,000 units), computer memory systems follow a binary scale of base-2 ($2^{10} = 1024$):
+                  </p>
+                  <ul className="list-disc pl-5 my-2 space-y-1 font-mono text-[11px] text-emerald-700">
+                    <li>1 Kilobyte (KB) = 1,024 Bytes</li>
+                    <li>1 Megabyte (MB) = 1,024 Kilobytes</li>
+                    <li>1 Gigabyte (GB) = 1,024 Megabytes</li>
+                    <li>1 Terabyte (TB) = 1,024 Gigabytes</li>
+                  </ul>
+                  <p>
+                    To scale down to smaller units, multiply your value by 1024 for each unit step. To convert up to larger units, divide by 1024. For example, to convert 5 Megabytes to Bytes:
+                  </p>
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 my-2 font-mono text-[11px] text-emerald-700">
+                    5 MB * 1024 * 1024 = 5,242,880 Bytes
+                  </div>
+                  <p>
+                    Knowing these conversions is critical because operating systems calculate memory capacity using the binary factor (1024), whereas physical storage drive manufacturers describe capacities using the decimal factor (1000).
+                  </p>
                 </div>
               </div>
             </div>

@@ -106,10 +106,7 @@ export default function DownloadModal({ isOpen, onClose, onDownload, fileName })
           )}
         </div>
 
-        {/* Large Ad Space */}
-        <div className="w-full flex justify-center mb-6">
-          <AdPlaceholder type="modal" className="border-slate-200 bg-slate-50/80" />
-        </div>
+
 
         {/* Action Button */}
         <div className="w-full">
