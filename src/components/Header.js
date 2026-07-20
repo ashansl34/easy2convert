@@ -105,12 +105,14 @@ export default function Header({ currentPage = "home", onScrollTo }) {
   const popAnim = "transition-all duration-300 hover:scale-110 hover:-translate-y-1 ease-in-out";
 
   return (
-    <header className="relative w-full bg-[#050b18] border-b-2 border-emerald-500 px-6 py-4 sticky top-0 z-40 shadow-sm overflow-hidden">
-      {/* Animated Liquid Background Canvas */}
-      <canvas
-        ref={headerCanvasRef}
-        className="absolute inset-0 z-0 pointer-events-none w-full h-full"
-      />
+    <header className="relative w-full bg-[#050b18] border-b-2 border-emerald-500 px-6 py-4 sticky top-0 z-50 shadow-sm">
+      {/* Animated Liquid Background Canvas Container */}
+      <div className="absolute inset-0 z-0 pointer-events-none w-full h-full overflow-hidden">
+        <canvas
+          ref={headerCanvasRef}
+          className="w-full h-full"
+        />
+      </div>
 
       <div className="relative z-10 max-w-6xl mx-auto flex items-center justify-between">
         
@@ -140,30 +142,32 @@ export default function Header({ currentPage = "home", onScrollTo }) {
               </svg>
             </a>
 
-            {/* Converter Dropdown Menu */}
-            <div className="absolute left-0 top-full mt-2 w-60 bg-[#0a1224] border border-slate-800 rounded-xl shadow-2xl py-2 hidden group-hover:block group-focus-within:block z-50">
-              <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🖼️</span> HEIC to JPG Converter
-              </a>
-              <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🖼️</span> WebP to JPG / PNG
-              </a>
-              <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>📄</span> PDF to Word (DOCX)
-              </a>
-              <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>📄</span> Word (DOCX) to PDF
-              </a>
-              <a href="/avif-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🖼️</span> AVIF to WebP/PNG
-              </a>
-              <a href="/svg-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🎨</span> SVG to PNG/JPEG
-              </a>
-              <div className="border-t border-slate-800/80 my-1" />
-              <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-emerald-400 hover:text-emerald-300 hover:bg-slate-800/60 font-bold transition-colors">
-                <span>⚡</span> Image Compressor →
-              </a>
+            {/* Converter Dropdown Menu Wrapper */}
+            <div className="absolute left-0 top-full pt-1.5 w-60 hidden group-hover:block group-focus-within:block z-50">
+              <div className="bg-[#0a1224] border border-slate-800 rounded-xl shadow-2xl py-2">
+                <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🖼️</span> HEIC to JPG Converter
+                </a>
+                <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🖼️</span> WebP to JPG / PNG
+                </a>
+                <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>📄</span> PDF to Word (DOCX)
+                </a>
+                <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>📄</span> Word (DOCX) to PDF
+                </a>
+                <a href="/avif-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🖼️</span> AVIF to WebP/PNG
+                </a>
+                <a href="/svg-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🎨</span> SVG to PNG/JPEG
+                </a>
+                <div className="border-t border-slate-800/80 my-1" />
+                <a href="/#converter" onClick={(e) => handleNavClick("converter", e)} className="flex items-center gap-2 px-4 py-2 text-xs text-emerald-400 hover:text-emerald-300 hover:bg-slate-800/60 font-bold transition-colors">
+                  <span>⚡</span> Image Compressor →
+                </a>
+              </div>
             </div>
           </div>
 
@@ -210,27 +214,29 @@ export default function Header({ currentPage = "home", onScrollTo }) {
               </svg>
             </a>
 
-            {/* Dropdown Menu Box */}
-            <div className="absolute right-0 top-full mt-2 w-60 bg-[#0a1224] border border-slate-800 rounded-xl shadow-2xl py-2 hidden group-hover:block group-focus-within:block z-50">
-              <a href="/base64-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>⚡</span> Base64 Encoder / Decoder
-              </a>
-              <a href="/case-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>📝</span> Text Case Converter
-              </a>
-              <a href="/svg-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🎨</span> SVG to PNG Converter
-              </a>
-              <a href="/json-to-ts" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🔷</span> JSON to TS Interface
-              </a>
-              <a href="/avif-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
-                <span>🖼️</span> AVIF to WebP/PNG
-              </a>
-              <div className="border-t border-slate-800/80 my-1" />
-              <a href="/calculators" className="flex items-center gap-2 px-4 py-2 text-xs text-emerald-400 hover:text-emerald-300 hover:bg-slate-800/60 font-bold transition-colors">
-                <span>🧮</span> All Dev Calculators →
-              </a>
+            {/* Dev Tools Dropdown Menu Wrapper */}
+            <div className="absolute right-0 top-full pt-1.5 w-60 hidden group-hover:block group-focus-within:block z-50">
+              <div className="bg-[#0a1224] border border-slate-800 rounded-xl shadow-2xl py-2">
+                <a href="/base64-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>⚡</span> Base64 Encoder / Decoder
+                </a>
+                <a href="/case-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>📝</span> Text Case Converter
+                </a>
+                <a href="/svg-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🎨</span> SVG to PNG Converter
+                </a>
+                <a href="/json-to-ts" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🔷</span> JSON to TS Interface
+                </a>
+                <a href="/avif-converter" className="flex items-center gap-2 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 font-semibold transition-colors">
+                  <span>🖼️</span> AVIF to WebP/PNG
+                </a>
+                <div className="border-t border-slate-800/80 my-1" />
+                <a href="/calculators" className="flex items-center gap-2 px-4 py-2 text-xs text-emerald-400 hover:text-emerald-300 hover:bg-slate-800/60 font-bold transition-colors">
+                  <span>🧮</span> All Dev Calculators →
+                </a>
+              </div>
             </div>
           </div>
 
